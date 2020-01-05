@@ -13,7 +13,7 @@ void multiply(martix &old1, martix old2, martix &mynew) //模拟
     if(old1.allone)
     {
         old1.allone=false;
-        for(long long i=0;i<n;i++) for(long long j=0;j<n;j++) old1.mydata[i][j]=old2.mydata[i][j];
+        for(long long i=0;i<n;i++) for(long long j=0;j<n;j++) {mynew.mydata[i][j]=old2.mydata[i][j]; }//原本的错误old1.mydata[i][j]=old2.mydata[i][j];
         return;
     }
     long long count=0;//要初始化？
@@ -53,6 +53,7 @@ int main()
     // ans.mydata=mine.mydata;
     ans.allone=true;
     for(long long i=0;i<n;i++) for(long long j=0;j<n;j++) ans.mydata[i][j]=mine.mydata[i][j];//copy数组
+    // cout<<mine.mydata[i][j]<<" ";}
     // 想办法让一开始数组*ans不变？不是，第一个双数次方不用*2？
     // if(k%2==1) k--;
     // k--;
@@ -65,7 +66,7 @@ int main()
         {
             //这种方法是只拆两份，单数只拆1出来，瞬间清醒了, 因为只需要上一次的状态，所以0维
             multiply(ans,mine,tmpans);
-            for(long long i=0;i<n;i++) for(long long j=0;j<n;j++) ans.mydata[i][j]=tmpans.mydata[i][j];
+            for(long long i=0;i<n;i++) for(long long j=0;j<n;j++){ ans.mydata[i][j]=tmpans.mydata[i][j];}//从一开始就全是0
             k--;
         }
         // else
