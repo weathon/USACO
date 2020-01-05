@@ -5,7 +5,7 @@ struct martix
 {                               //写到最后发现拼写错了，不管了，就像HTTP协议一样，将错就错
     long long mydata[200][200]; //避免传递参数的麻烦
 };
-int n, k;
+int n;
 
 void multiply(martix old1, martix old2, martix &mynew) //模拟
 {
@@ -18,11 +18,11 @@ void multiply(martix old1, martix old2, martix &mynew) //模拟
         //第二个数组的每一列 ,要两个循环
         for (int j = 0; j < n; j++)
         {
-            int sum = 0;
+            long long sum = 0;
             //每一个项目
-            for (int k = 0; k < n; k++)
+            for (int k = 0; k < n; k++) //问题处在这，k这个变量重复了
                 sum += (old1.mydata[i][k] * old2.mydata[k][j]) % 1000000007;
-            // cout<<sum<<" ";
+            cout << sum << " ";
             // mynew.mydata[count%n][count/n]=sum;
             mynew.mydata[count / n][count % n] = sum; //注意方向
             count++;
@@ -36,7 +36,10 @@ void dfs(martix old, int power, martix &ret) //需要计算的数组，幂次，
     {
         for (int i = 0; i < n; i++)
             for (int j = 0; j < n; j++) //复制数组,其实可以直接当作一次放来算？
+            {
                 ret.mydata[i][j] = old.mydata[i][j];
+                // cout << old.mydata[i][j] << " ";
+            }
     }
     else if (power % 2 == 0) //双数
     {
@@ -55,6 +58,7 @@ void dfs(martix old, int power, martix &ret) //需要计算的数组，幂次，
 
 int main()
 {
+    int k;
     cin >> n >> k;
     martix mine;
     for (int i = 0; i < n; i++)
@@ -74,4 +78,4 @@ int main()
     return 0;
 }
 
-//目前版本OK了
+//目前版本OK了，但是大数字会全0，不是数字过大的问题， 1 1 1 1也会
