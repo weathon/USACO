@@ -9,7 +9,7 @@ int n;
 
 void multiply(martix old1, martix old2, martix &mynew) //模拟
 {
-    int count;
+    long long count=0;//要初始化？
     for (int i = 0; i < n; i++)
     {
 
@@ -22,7 +22,7 @@ void multiply(martix old1, martix old2, martix &mynew) //模拟
             //每一个项目
             for (int k = 0; k < n; k++) //问题处在这，k这个变量重复了
                 sum += (old1.mydata[i][k] * old2.mydata[k][j]) % 1000000007;
-            cout << sum << " ";
+            // cout << sum << " ";
             // mynew.mydata[count%n][count/n]=sum;
             mynew.mydata[count / n][count % n] = sum; //注意方向
             count++;
@@ -58,7 +58,9 @@ void dfs(martix old, int power, martix &ret) //需要计算的数组，幂次，
 
 int main()
 {
-    int k;
+    // freopen("3390.txt","r",stdin);
+    // cout<<"aaa";
+    long long k;//没想到这个
     cin >> n >> k;
     martix mine;
     for (int i = 0; i < n; i++)
@@ -71,11 +73,11 @@ int main()
     {
         for (int j = 0; j < n; j++)
         {
-            cout << ans.mydata[i][j] << " ";
+            cout << ans.mydata[i][j];
+            if(j!=n-1)//有坑
+            cout<<" ";
         }
         cout << endl;
     }
     return 0;
 }
-
-//目前版本OK了，但是大数字会全0，不是数字过大的问题， 1 1 1 1也会
