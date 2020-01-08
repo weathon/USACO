@@ -46,7 +46,7 @@ int main()
     double l,r;
     cin>>N>>l>>r;
     for(int i=0;i<=N;i++) cin>>Ns[i];//这里也漏了=
-    search(l,r);
+    // search(l,r);
     // cout<<f(-0.4)<<endl;
     return 0;
 }
