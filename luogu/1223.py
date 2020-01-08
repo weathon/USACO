@@ -11,9 +11,10 @@ for i in numlist:
     index=0
     for j in old_numlist:
         # print((i,j))
-        if int(j)==i:
-            print(index+1,end=" ")#不是输出时间而是编号
-            old_numlist[j]="a"
+        if j != "-100":
+            if int(j)==i:
+                print(index+1,end=" ")#不是输出时间而是编号
+                old_numlist[int(index)]="-100"#index not j
         index+=1
 print()
 sumtime=0
