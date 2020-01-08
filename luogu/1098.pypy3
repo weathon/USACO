@@ -1,0 +1,4 @@
+i1=input()
+i2=input()
+p1,p2,p3=i1.split()
+p1,p2,p3=int(p1)
