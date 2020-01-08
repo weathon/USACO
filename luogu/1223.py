@@ -13,7 +13,7 @@ for i in numlist:
         # print((i,j))
         if int(j)==i:
             print(index+1,end=" ")#不是输出时间而是编号
-            old_numlist[j]=-100
+            old_numlist[j]="a"
         index+=1
 print()
 sumtime=0
