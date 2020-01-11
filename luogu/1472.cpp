@@ -3,7 +3,7 @@ using namespace std;
 
 const int Mod = 9901;
 int n, k;
-int f[210][210];
+long long f[210][210];
 
 int main()
 {
@@ -28,29 +28,32 @@ int main()
                 //myleft is x-1, y is anything
                 if (myleft != myright)
                 {
-                    int mymax = 0;
-                    for (int o = 0; o <j; o++) //Just take the last one?  Not <=j
+                    long long mymax = 0;
+                    for (int o = 1; o <j; o++) //Just take the last one?  Not <=j
                     {
-                        if (f[myright][o] > mymax)
-                            mymax = f[myright][o];
+                        // if (f[myright][o] > mymax)
+                            mymax += f[myright][o]%Mod;
                     }
                     f[i][j] += (f[myleft][j - 1] * mymax) % Mod;
 
                     //The other way
                     mymax = 0;
-                    for (int o = 0; o < j ; o++) //Just take the last one?
+                    for (int o = 1; o < j ; o++) //Just take the last one?
                     {
                         // if(f[myleft][o]>mymax) mymax=f[myright][o];
-                        if (f[myleft][o] > mymax)
-                            mymax = f[myleft][o];
+                        // if (f[myleft][o] > mymax)
+                            mymax += f[myleft][o]%Mod;
                     }
                     // f[i][j]+=(f[myleft][j-1]*mymax)%Mod;
-                    f[i][j] += (f[myright][j - 1] * mymax) % Mod;
+                    f[i][j] += (f[myright][j - 1] * mymax) % Mod;//Wrong Mod way
+                    f[i][j]=f[i][j]%Mod;
                 }
             }
         }
     }
+
     //Debug, at last var?
-    cout << f[n][k] - f[n][k-1]<< endl; //By debug, f[n][k] and f[n][k-1] is both 2, that makes it 0
+    cout << f[n][k]<< endl; //By debug, f[n][k] and f[n][k-1] is both 2, that makes it 0
+    // My ans is 21610, no mod?
     return 0;
 }
