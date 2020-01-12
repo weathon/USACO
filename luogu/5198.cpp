@@ -35,6 +35,9 @@ void dfs(int x, int y)
 
 int main()
 {
+    freopen("perimeter.in","r",stdin);
+    freopen("perimeter.out","w",stdout);
+    
     cin >> n;
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++)
