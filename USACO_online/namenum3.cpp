@@ -21,13 +21,15 @@ int hasans = 0;
 // freopen("namenum.out", "w", stdout);
 int main()
 {
+    freopen("namenum.in", "r", stdin);
+freopen("namenum.out", "w", stdout);
     ifstream fin;
     fin.open("dict.txt");
     int myindex = 0;
     while (fin >> mydict[myindex])
     {
         // if (mydict[myindex].length() == n)
-            myindex++;
+        myindex++;
     }
     // cout<<myindex;
     for (int i = 0; true; i++)
@@ -50,22 +52,43 @@ int main()
             continue;
         else
         {
+            bool ifans = true;
             for (int j = 0; j < n; j++)
             {
-                // cout<<mys[j]<<" "<<(mys[j] - 'A') / 3 + 2;
+                // cout<<mys<<endl;
                 if (mys[j] > 'Q')
                 {
-                    if ((mys[j] - 'A' - 1) / 3 + 2 != numlist[j])
+                    // cout << mys[j] << " " << ((mys[j] - 'A') - 1) / 3 + 2 << " "<<numlist[j]<< endl;
+                    if (((mys[j] - 'A') - 1) / 3 + 2 != int(numlist[j] - '0')) //forget the int
+                    {
+                        ifans = false;
                         break;
+                    }
                 }
-                else if ((mys[j] - 'A') / 3 + 2 != numlist[j])
-                    break;
+                else
+                {
+                    // cout << mys[j] << " " << (mys[j] - 'A') / 3 + 2<<endl;
+                    // cout << mys[j] << " " << ((mys[j] - 'A') ) / 3 + 2 << " "<<numlist[j]<< endl;
+
+                    if ((mys[j] - 'A') / 3 + 2 != int(numlist[j] - '0'))
+                    {
+                        ifans = false;
+
+                        break;
+                    }
+                }
+
+                //place it out side of for ? so the break does not work
+            }
+            if (ifans)
+            {
+                cout << mys << endl;
+                hasans++;
             }
             // cout << mys.length() << endl;
-            // cout << mys << endl;
-            hasans++;
         }
     }
+    // cout<<hasans;
     if (hasans == 0)
         cout << "NONE" << endl;
     return 0;
