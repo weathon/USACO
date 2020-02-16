@@ -42,29 +42,7 @@ int main(void)
     // }
     for (int i = 0; i < N; i++)
     {
-        for (int j = 0; j < N; j++)
-        {
-            // cout << numlist[j] << " " << numlist[i] << endl;
-
-            if (i == j)
-                continue;
-            if (numlist[i] - 17 > numlist[j]) //forget the -17
-            {
-                cost += (abs(numlist[i] - numlist[j]) - 17) * (abs(numlist[i] - numlist[j]) - 17);
-                cout << numlist[j] << " " << numlist[i] << endl;
-
-                numlist[j] = numlist[i] - 17;
-                // cost += (abs(numlist[i] - numlist[j]) - 17) * (abs(numlist[i] - numlist[j]) - 17);
-            }
-            else if (numlist[j] > numlist[i] + 17)
-            {
-                cost += (abs(numlist[i] - numlist[j]) - 17) * (abs(numlist[i] - numlist[j]) - 17);
-                cout << numlist[j] << " " << numlist[i] << endl;
-
-                numlist[j] = numlist[i] + 17;
-                // cost += (abs(numlist[i] - numlist[j]) - 17) * (abs(numlist[i] - numlist[j]) - 17);
-            }
-        }
+        
     }
     cout << cost << endl;
     return 0;
