@@ -34,8 +34,8 @@ bool ifin(string a, string b[5003])
 int main(void)
 {
     // cout<<test+'a';
-    freopen("namenum.in", "r", stdin);
-    freopen("namenum.out", "w", stdout);
+    // freopen("namenum.in", "r", stdin);
+    // freopen("namenum.out", "w", stdout);
     // int num;
     // cout<<char('A'+1);
     int n = 0;

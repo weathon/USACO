@@ -21,16 +21,10 @@ int hasans = 0;
 // freopen("namenum.out", "w", stdout);
 int main()
 {
-    freopen("namenum.in", "r", stdin);
-freopen("namenum.out", "w", stdout);
-    ifstream fin;
-    fin.open("dict.txt");
-    int myindex = 0;
-    while (fin >> mydict[myindex])
-    {
-        // if (mydict[myindex].length() == n)
-        myindex++;
-    }
+//     freopen("namenum.in", "r", stdin);
+// freopen("namenum.out", "w", stdout);
+    // ifstream fin;
+    // fin.open("dict.txt");
     // cout<<myindex;
     for (int i = 0; true; i++)
     {
@@ -42,6 +36,12 @@ freopen("namenum.out", "w", stdout);
             break;
         numlist[i] = tmp;
         n++;
+    }
+        int myindex = 0;
+    while (cin >> mydict[myindex])
+    {
+        // if (mydict[myindex].length() == n)
+        myindex++;
     }
     // cout<<n;
     for (int i = 0; i < myindex; i++)
@@ -58,6 +58,7 @@ freopen("namenum.out", "w", stdout);
                 // cout<<mys<<endl;
                 if (mys[j] > 'Q')
                 {
+                    
                     // cout << mys[j] << " " << ((mys[j] - 'A') - 1) / 3 + 2 << " "<<numlist[j]<< endl;
                     if (((mys[j] - 'A') - 1) / 3 + 2 != int(numlist[j] - '0')) //forget the int
                     {

@@ -13,8 +13,8 @@ int numlist[1500];
 
 int main(void)
 {
-    freopen("skidesign.in", "r", stdin);
-    freopen("skidesign.out", "w", stdout);
+    // freopen("skidesign.in", "r", stdin);
+    // freopen("skidesign.out", "w", stdout);
     cin >> N;
     for (int i = 0; i < N; i++)
     {
