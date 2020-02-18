@@ -12,6 +12,8 @@ LANG: C++14
 #include <fstream>
 #include <algorithm>
 using namespace std;
+long long next_on_right_len[30];
+int next_on_right_index[30];
 
 struct xy
 {
@@ -30,15 +32,28 @@ void checkloop()
     // mycount++;
     for (int i = 0; i < N; i++)
     {
-        //i:遍历起点
-        // for(int j=0;j<N;j++)
-        // {
-        //     // //j:遍历可行的虫洞外穿梭 （如果有多个虫洞重叠？？提前遍历弄好数组 from video
-        //     // if(holes[i].x != holes[j].x and holes[j].y ==holes[j].y)
-        //     // {
+        int whereibegin = i;
+        int nextloopindex = i; //递推代替递归
+        bool dualb = false;
+        for (int _ = 0; _ < 2 * N; _++)
+        {
 
-        //     // }
-        // }
+            if (next_on_right_len[nextloopindex] == 2907154449)
+                break;
+            // cout<<next_on_right_index[nextloopindex]<<endl;
+
+            nextloopindex = mypair[next_on_right_index[nextloopindex]];
+            if (nextloopindex == whereibegin)
+            {
+                mycount++;
+                dualb = true;
+                break; //need dual breaks
+            }
+            // if (dualb)
+            // break;
+        }
+        if (dualb)
+            break;
     }
 }
 
@@ -72,31 +87,31 @@ void solve()
     }
 }
 
-int next_on_right_len[30];
-int next_on_right_index[30];
-
 int main()
 {
     for (int i = 0; i < 30; i++)
         mypair[i] = -1;
     freopen("wormhole.in", "r", stdin);
-    // freopen("wormhole.out", "w", stdout);
+    freopen("wormhole.out", "w", stdout);
     cin >> N;
     for (int i = 0; i < N; i++)
     {
         cin >> holes[i].x >> holes[i].y;
     }
-
     for (int i = 0; i < N; i++)
     {
-        next_on_right[i] = 1000000005;
+        next_on_right_len[i] = 2907154449;
+    } //怒可以和下面在一起？
+    for (int i = 0; i < N; i++)
+    {
+        // next_on_right_len[i] = 2907154449;
         for (int j = 0; j < N; j++)
         {
             if (holes[i].x < holes[j].x and holes[i].y == holes[j].y and
                 (holes[j].x - holes[i].x) < next_on_right_len[i])
             {
                 next_on_right_len[i] = (holes[j].x - holes[i].x);
-                next_on_right_index[i] = j
+                next_on_right_index[i] = j;
             }
         }
     }
