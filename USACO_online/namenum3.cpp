@@ -32,19 +32,20 @@ int main()
         // cin >> tmp;
         tmp = getchar();
         // cout<<tmp;
-        if (tmp == '\n')
+        if (tmp == '\n' or tmp=='\r')//原来就是这里要\r
             break;
         numlist[i] = tmp;
         n++;
     }
         int myindex = 0;
-    while (cin >> mydict[myindex])
-    {
+    // while (cin >> mydict[myindex])
+    // {
         // if (mydict[myindex].length() == n)
-        myindex++;
-    }
+        // myindex++;
+    // }
     // cout<<n;
-    for (int i = 0; i < myindex; i++)
+    for(int i=0;i<4617;i++) cin >> mydict[i];
+    for (int i = 0; i < 4617; i++)//这里不可以继续用index,但是之前上面是有while啊
     {
         string mys;
         mys = mydict[i];
