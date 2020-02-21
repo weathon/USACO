@@ -61,14 +61,14 @@ using namespace std;
 
 int N;
 int maxpq;
-int bisquares[100000];
+// int bisquares[100000];
 short tong[225000];
 int pointer = 0;
 
 int main(void)
 {
-    // freopen("ariprog.in", "r", stdin);
-    // freopen("ariprog.out", "w", stdout);
+    freopen("ariprog.in", "r", stdin);
+    freopen("ariprog.out", "w", stdout);
     //看了别人用人用sort做
     //上升序列？
     cin >> N;
@@ -78,8 +78,8 @@ int main(void)
     {
         for (q = 0; q <= maxpq; q++)
         {
-            bisquares[pointer] = p * p + q * q;
-            tong[bisquares[pointer]] = 1;
+            // bisquares[pointer] = p * p + q * q;
+            tong[p * p + q * q] = 1;
             pointer++;
         }
     }
@@ -139,3 +139,4 @@ int main(void)
     if(ifans==0) cout<<"NONE"<<endl;
     return 0;
 }
+//只超时了0.1 https://www.luogu.com.cn/record/30912346
