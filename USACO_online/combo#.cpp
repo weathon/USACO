@@ -5,14 +5,15 @@ LANG: C++14
 */
 #include <iostream>
 #include <fstream>
-// #include <algorithm>
-// #include <map>
+#include <algorithm>
+#include <map>
+// #include <math>
 using namespace std;
 
 int N;
 int a1, a2, a3;
 int b1, b2, b3;
-bool tong[10000000];
+short tong[2000000];
 int mycount=0;
 
 int main()
@@ -29,7 +30,7 @@ int main()
     a3--;
     b1--;
     b2--;
-    b3--;//即使一行代码也没有也不行，内存？
+    b3--;
     for (int i = a1 - 2; i <= a1 + 2; i++)
     {
         int ii = i;
@@ -51,8 +52,8 @@ int main()
                     kk = N + kk + 1;
                 while (kk > N)
                     kk = kk - N - 1;
-                tong[(ii * 10000) + (jj * 100) + kk] = true;
-            }
+                tong[ii * 10000 + jj * 100 + kk] = 1;
+            }//phy
         }
     }
 
@@ -77,13 +78,13 @@ int main()
                     kk = N + kk + 1;
                 while (kk > N)
                     kk = kk - N - 1;
-                tong[ii * 10000 + jj * 100 + kk] = true;
+                tong[ii * 10000 + jj * 100 + kk] = 1;
             }
         }
     }
 
-for(int c=0;c<100000000;c++)//编译错误，why?x
-    if(tong[c]) mycount+=1;
+for(int i=0;i<2000000;i++)
+    mycount+=tong[i];
 cout<<mycount<<endl;
 
     return 0;
