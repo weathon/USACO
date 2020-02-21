@@ -97,7 +97,7 @@ int main(void)
     //{
     //    if(bisquares[i]-bisquares[i-1]>maxdiffer) maxdiffer=bisquares[i]-bisquares[i-1];
     //}
-    for (b = 1; b < (maxppqq)/(N-2); b++)//优化maxppqq为maxdiffer?不行，可以跨越的  这里可以N-2,智商刚才和下面的一起修改了，瞬间快了好多，最后的结束没有了
+    for (b = 1; b < (maxppqq*2)/(N-2); b++)//优化maxppqq为maxdiffer?不行，可以跨越的  这里可以N-2,智商刚才和下面的一起修改了，瞬间快了好多，最后的结束没有了
     {
         for (a = 0; a < maxppqq; a++)//直接用整除取余数可以吗  一倍就够了，很快了
         {
