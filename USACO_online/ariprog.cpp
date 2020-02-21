@@ -89,9 +89,10 @@ int main(void)
     int a;//移到外面来之后多过了一个点
     int b;
     int maxppqq=maxpq * maxpq+1;//常熟
-    int maxppqq2=maxpq * maxpq;//常熟
+    int maxppqq2=maxppqq*2;//常熟
     int j;
     int maxdiffer=0;
+    int nb_1;
     // sort(bisquares,bisquares+pointer-1);
     //for(int i=1;i<pointer;i++)
     //{
@@ -99,8 +100,12 @@ int main(void)
     //}
     for (b = 1; b < (maxppqq*2)/(N-2); b++)//优化maxppqq为maxdiffer?不行，可以跨越的  这里可以N-2,智商刚才和下面的一起修改了，瞬间快了好多，最后的结束没有了
     {
+        nb_1=b*(N-1);//这个放在外面最后一个点过了
         for (a = 0; a < maxppqq; a++)//直接用整除取余数可以吗  一倍就够了，很快了
         {
+            // if(a+b*(N-1)>maxppqq2*2) continue;//改成N-1就可以AC了，但是是有两个点超时
+            if(a+nb_1>maxppqq2) break;//改成N-1就可以AC了，但是是有两个点超时
+
             // a=bisquares[j];
             //如果是先a可以jianzhi?
             // if(tong[a]!=1) continue;
