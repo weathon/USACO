@@ -56,6 +56,7 @@ LANG: C++14
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include <cstdio>
 using namespace std;
 
 int N;
@@ -123,11 +124,12 @@ int main(void)
             
                 if (count >= N-1)
                 {
-                    cout << a << " " << b << "\n";
+                    // cout << a << " " << b << "\n";
+                    printf("%d %d\n",a,b);
                     ifans=1;
                     break;
                 }
-                if (current >= maxppqq2*2)
+                if (current >= maxppqq2)//上面已经改了这里就不用*2了  修改了这里之后最后一个点就从1.2变成1.1了
                     break;
 
                 count++;
