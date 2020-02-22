@@ -62,15 +62,27 @@ void solve(int a, int b, int c)
 
 int main(void)
 {
-    // freopen("milk3.in", "r", stdin);
-    // freopen("milk3.out", "w", stdout);
+    freopen("milk3.in", "r", stdin);
+    freopen("milk3.out", "w", stdout);
     cin >> av >> bv >> cv;
     vlist[0] = av;
     vlist[1] = bv;
     vlist[2] = cv;
     solve(0, 0, cv);
+    bool first=true;
     for (int i = 0; i < 50; i++)
-        if(anstong[i]==1) cout<<i<<" ";
+        if(anstong[i]==1)
+        {
+            if(first)
+            {
+                cout<<i;
+                first=false;
+            }
+            else{
+                cout<<" "<<i;
+            }
+        }
+    
     cout << endl;
     return 0;
 }
