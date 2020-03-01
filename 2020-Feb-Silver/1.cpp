@@ -14,17 +14,17 @@ int tmp;
 //回来的路上突然想到 因为每一次M都是一样的，先扫描一次变为指定函数
 int map[200000];
 
-int times;
+// int times;
 int main()
 {
     freopen("swap.in", "r", stdin);
     freopen("swap.out", "w", stdout);
-    // ios_base::sync_with_stdio(false); cin.tie(0);  //加上这一行答案就不正确了
+    ios_base::sync_with_stdio(false); cin.tie(0);  //加上这一行答案就不正确了
     cin >> N >> M >> K;
     for (int i = 1; i <= M; i++)
     {
-        // cin >> Ls[i] >> Rs[i];
-        scanf("%d%d", &Ls[i], &Rs[i]);
+        cin >> Ls[i] >> Rs[i];
+        // scanf("%d%d", &Ls[i], &Rs[i]);
     }
     for (int i = 1; i <= N; i++)
     {
@@ -34,18 +34,9 @@ int main()
     int j;
     for (int i = 1; i <= M; i++)
     {
-        // L = Ls[i];
-        // R = Rs[i];
-        // cout<<L<<" "<<R<<endl;  2 5 3 7 两次
         for (j = Ls[i]; j <= (Rs[i] + 1 - Ls[i]) / 2 + Ls[i] - 1; j++)
         {
-            // map[Rs[i] - j + Ls[i]]=cows[0][j];
-            // map[j]=cows[0][Rs[i] - j + Ls[i]]; //必须用cow而不是map？
-            // tmp = map[Rs[i] - j + Ls[i]];
-            // map[Rs[i] - j + Ls[i]] = map[j];
-            // map[j] = tmp; //太吵，写错了
             swap(map[j], map[Rs[i] - j + Ls[i]]);  //也不行，来回交换了？ 检测来回交换来优化？太累了不想写
-
         }
     }
 
@@ -76,8 +67,8 @@ int main()
     // cout<<times<<endl;
     for (i = 1; i <= N; i++)
     {
-        // cout << cows[(att) % 2][i] << endl;
-        printf("%d\n", cows[(K % (M * K)) % 2][i]);
+        cout << cows[(K % (M * K)) % 2][i] << endl;
+        // printf("%d\n", cows[(K % (M * K)) % 2][i]);
     }
     return 0;
 }
