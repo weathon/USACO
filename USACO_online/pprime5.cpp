@@ -101,44 +101,28 @@ void solve(int digs, int begin, int end) //位数和开始数值以及结束数�
 
 int main()
 {
-    // freopen("pprime.in", "r", stdin);
-    // freopen("pprime.out", "w", stdout);
-    // cin>>a>>b;
+    // freopen("i.in","r",stdin);
     a = 0;
-    while (1)
+    while (tmp = getchar())
     {
-        tmp = getchar();
-        if (tmp == ' ' or tmp == '\n' or tmp=='\r')
+        // ;
+        if (tmp == ' ' or tmp == '\n' or tmp=='\r' or tmp=='\0')//可能没有以\n结束
             break;
         a = a * 10 + (tmp - '0');
         ac[alen] = tmp;
         alen++;
     }
     b = 0;
-    while (1)
+    while (cin>>tmp)//保存有延时，cin可以 getchar不行
     {
-        tmp = getchar();
-        if (tmp == '\n' or tmp == '\r' or tmp==' ')
+        // cout<<tmp<<endl;
+        if (tmp == '\n' or tmp == '\r' or tmp==' ' or tmp=='\0')// \0加在了上面一行
             break;
         b = b * 10 + (tmp - '0');
         bc[blen] = tmp;
         blen++;
     }
-    // if(alen==blen)
-    // {
-    //     // 两个位数相同
-    //     solve(alen,a,b);
-    // }
-    // else if(alen<blen)
-    // {
-    //     //位数不相同，但也只有可能是b比a大  还有一种办法就是判断完整的，检测之前先判断是否在a,b之间
-    //     solve(alen,a,ten_to_ith_power[alen]-1);
-    //     for(int _=alen+1;_<=blen-1;_++)
-    //     {
-    //         solve(_,0,ten_to_ith_power[_]-1);//这里也不是0
-    //     }
-    //     solve(blen,ten_to_ith_power[alen-1],b);
-    // }
+    // cout<<a<<endl<<b;
     for (int _ = alen; _ <= blen; _++)
         solve(_, ten_to_ith_power[_ - 1], ten_to_ith_power[_] - 1);
     return 0;
