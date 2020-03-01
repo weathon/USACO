@@ -55,7 +55,7 @@ inline int ifprimen8(int num)
     // if (ifprimetable[num] == -1)
     //     return 0;
     sroot = sqrt(num);
-    for (k = 3; k <= sroot; k += 2) //这里改成2之后不用o2反而更慢了
+    for (k = 3; k <= sroot; k += 2) //这里改成2之后不用o2反而更慢了 这里的root一开始忘了改
     {
         // if (k % 2 == 0)
         //     continue;
@@ -97,7 +97,7 @@ int main()
             }
             else
             {
-                if (ifprime(tmp) != 1)
+                if (ifprimen8(tmp) != 1)
                 {
                     ans = 0;
                     i += (nsquare[j] - i % nsquare[j]); //开了o2没有结果输出
@@ -114,3 +114,5 @@ int main()
     return 0;
 }
 //别人的是另一种方法，是枚举每一个位置上的数字，实际速度明显快很多
+
+// 一下子全部0.04s?
