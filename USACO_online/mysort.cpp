@@ -59,29 +59,33 @@ void dfs(int id)
     if (id == -1)
         return;
     dfs(mytree[id].L);
-    cout << mytree[id].L<<" "<<mytree[id].R<<"---- " << mytree[id].num << endl;
+    // cout << mytree[id].L<<" "<<mytree[id].R<<"---- " << mytree[id].num << endl;
     mytree[id].afterid = afteridcounter;
     afteridcounter++;
     dfs(mytree[id].R);
 }
-int maxstep = -1;
+int maxstep = 0;
 int tmp2;
 void countmaxstep(int id)
 {
     if (id == -1)
         return;
-    tmp2 = abs(mytree[id].beforeid - mytree[id].afterid);
+
+    // dfs(mytree[id].L);
+    // dfs(mytree[id].R);//问题出在这里
+
+    countmaxstep(mytree[id].L);
+        tmp2 = abs(mytree[id].afterid-mytree[id].beforeid);
     if (tmp2 > maxstep)
         maxstep = tmp2;
-
-    dfs(mytree[id].L);
-    dfs(mytree[id].R);
+    // cout<<mytree[id].beforeid<<" "<<mytree[id].afterid<<" "<<mytree[id].num<<endl;
+    countmaxstep(mytree[id].R);
 }
 int zero = 0;
 int main()
 {
     freopen("sort.in", "r", stdin);
-    // freopen("sort.out", "w", stdout);
+    freopen("sort.out", "w", stdout);
     cin >> N;
     for (int i = 0; i < N; i++)
     {
@@ -94,7 +98,7 @@ int main()
     
     countmaxstep(0); //这个函数有问题？本来就没有输出内容但是调用的话会有递归输出  修改文件名之后什么输出都没有了?编辑器还是原来的窗口
     //以文件夹打开重新编译也不会了？还是那个数字的问题？ backup.out
-    
-    cout << maxstep << endl;
+
+    cout << maxstep+1 << endl;
     return 0;
 }
