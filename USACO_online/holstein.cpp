@@ -5,7 +5,8 @@ LANG: C++14
 */
 
 #include <iostream>
-#include <queue> //队列
+#include <stack>
+#include <vector>
 using namespace std;
 
 int v;
@@ -13,16 +14,74 @@ int vlist[30];
 int g;
 int glist[30][30];
 
-queue<sta> q;
+struct current
+{
+    int s[30]; //表示每一种维他命的数量
+    current()
+    {
+        // int index;
+        for (auto &i : s)
+        {
+            i *= 0; //可行
+            // cout<<s[index]<<endl;
+            // index++;
+        }
+    }
+    vector<int> ans;
+};
 
-//这种题目最好广度优先？
-//顺便联系一下，好久没有用过了
-//jianzhi和广度优先的关系?
-//背包问题? 迭代加深？
-// bfs很难表示？
+int thisg; //迭代加深，同时满足最小和字典序（？）但是迭代加深的不是深度而是数量？
+void dfs(int a, current b, int count)
+{
+
+    // for(int _=0;_<g;_++)
+    // {
+    //     b.s[_]+=glist[a][_];
+    // }
+    // if(a>=v) return;
+    // cout<<a<<" ";
+    bool ifpass = true;
+    for (int _ = 0; _ < g; _++)//这里用g下面用vlist?
+    {
+        if (b.s[_]  vlist[_]) //>=写成了小于？
+        {
+            ifpass = false;
+            break;
+        }
+    }
+    if (ifpass)
+    {
+        cout << count << " ";
+        // cout<<b.ans[1]<<endl;
+        // for(auto __:b.ans) cout<<__+1<<" ";//骑完车眼睛超级累
+        // cout<<"\b"<<endl;
+        for (int i = 0; i < b.ans.size() - 1; i++)
+        {
+            cout << b.ans[i] + 1 << " ";
+        }
+        cout << b.ans[b.ans.size() - 1] + 1 << endl;
+        exit(0); //不能就这样退出，字典序问题，先便利有的？
+    }
+    if (count > thisg) //由于是先判断，所以是>?还是说要直接后判断？
+    {
+        // cout<<count<<" "<<a<<endl;
+        return;
+    }
+    current tmp = b;
+    for (int _ = 0; _ < g; _++)
+    {
+        tmp.s[_] += glist[a][_];
+    }
+    tmp.ans.push_back(a);
+    dfs(a + 1, tmp, count + 1);
+    // tmp.ans.pop_back();
+    dfs(a + 1, b, count); //这里用tmp会出0
+}
 
 int main(void)
 {
+    freopen("holstein.in", "r", stdin);
+    // freopen("holstein.out", "w", stdout);
     cin >> v;
     for (int i = 0; i < v; i++)
     {
@@ -37,25 +96,11 @@ int main(void)
         }
     }
 
-    sta tmp;
-    tmp.tong[0] = 1;
-    tmp.deepth++;
-    q.push(tmp);
-    tmp.tong[0] = -1;
-    tmp.deepth++;
-    q.push(tmp);
-
-    //突然想到bfs是队列dfs是stack
-    // for(int i=0;i<v;i++)
-    while (!q.empty())
+    for (thisg = 1; thisg <= g; thisg++) //<=g
     {
-        // for (int i = 0; i < q.size(); i++)
-        // {
-            // tmp[i]//先做出结果？
-        // }
-        //不需要用数组保存结果
-        tmp=q.front();
-        tmp.tong[]
+        current a;
+        dfs(0, a, 0);
     }
+
     return 0;
 }
