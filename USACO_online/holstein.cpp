@@ -7,6 +7,7 @@ LANG: C++14
 #include <iostream>
 #include <stack>
 #include <vector>
+#include <set>
 using namespace std;
 
 int v;
@@ -28,9 +29,11 @@ struct current
         }
     }
     vector<int> ans;
+    set<int> used;
 };
 
 int thisg; //迭代加深，同时满足最小和字典序（？）但是迭代加深的不是深度而是数量？
+//迭代加深会出现的问题还有之前想到的，如果是后面的数单个怎么办
 void dfs(int a, current b, int count)
 {
 
@@ -38,12 +41,13 @@ void dfs(int a, current b, int count)
     // {
     //     b.s[_]+=glist[a][_];
     // }
-    // if(a>=v) return;
+    if (a >= v)
+        return;
     // cout<<a<<" ";
     bool ifpass = true;
-    for (int _ = 0; _ < g; _++)//这里用g下面用vlist?
+    for (int _ = 0; _ < v; _++) //这里用g下面用vlist?
     {
-        if (b.s[_]  vlist[_]) //>=写成了小于？
+        if (b.s[_] < vlist[_]) //>=写成了小于？
         {
             ifpass = false;
             break;
@@ -60,22 +64,37 @@ void dfs(int a, current b, int count)
             cout << b.ans[i] + 1 << " ";
         }
         cout << b.ans[b.ans.size() - 1] + 1 << endl;
-        exit(0); //不能就这样退出，字典序问题，先便利有的？
+        // exit(0); //不能就这样退出，字典序问题，先便利有的？
     }
     if (count > thisg) //由于是先判断，所以是>?还是说要直接后判断？
     {
         // cout<<count<<" "<<a<<endl;
         return;
     }
-    current tmp = b;
-    for (int _ = 0; _ < g; _++)
+    // for (int _ = 0; _ < v; _++)
+    // {
+    //     tmp.s[_] += glist[a][_];
+    // } 不使用有无遍历，使用每一次遍历下一个
+    // tmp.ans.push_back(a);
+    // dfs(a + 1, tmp, count + 1);
+    // // tmp.ans.pop_back();
+    // dfs(a + 1, b, count); //这里用tmp会出0
+    for (int k = 0; k < g; k++)
     {
-        tmp.s[_] += glist[a][_];
+        // current tmp = b;//复制过来会重置吗？
+        // tmp.s=b.s;
+        // tmp.used=b.used;
+        // tmp.ans=b.ans;
+        if (tmp.used.count(k) == 0)
+        {
+            tmp.used.insert(k);//分清楚内容和下biao
+            for (int _ = 0; _ < v; _++)
+            {
+                tmp.s[_] += glist[a][_];
+            }
+            dfs(a+1,tmp,count+1);
+        }
     }
-    tmp.ans.push_back(a);
-    dfs(a + 1, tmp, count + 1);
-    // tmp.ans.pop_back();
-    dfs(a + 1, b, count); //这里用tmp会出0
 }
 
 int main(void)
