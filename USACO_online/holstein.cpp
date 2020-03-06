@@ -13,12 +13,6 @@ int vlist[30];
 int g;
 int glist[30][30];
 
-struct sta
-{
-    int deepth=0;
-    char tong[30] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; //-1表示没有,0表示不确定（还没搜索到）1表示有
-};
-
 queue<sta> q;
 
 //这种题目最好广度优先？
@@ -45,8 +39,10 @@ int main(void)
 
     sta tmp;
     tmp.tong[0] = 1;
+    tmp.deepth++;
     q.push(tmp);
     tmp.tong[0] = -1;
+    tmp.deepth++;
     q.push(tmp);
 
     //突然想到bfs是队列dfs是stack
@@ -57,6 +53,7 @@ int main(void)
         // {
             // tmp[i]//先做出结果？
         // }
+        //不需要用数组保存结果
         tmp=q.front();
         tmp.tong[]
     }
