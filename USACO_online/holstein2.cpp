@@ -19,13 +19,7 @@ int status[30];
 // int ans[10000];
 vector<int> ans;
 set<int> used; //忘了这个,但是理论上不会有重复的啊，直接全局变量
-// struct ans
-// {
-// string mylist;
-//     int howdeep;
-// };
 
-// ans anses[100000];
 vector<int> finalans;
 int nowg;
 
@@ -80,7 +74,7 @@ int main(void)
 
     // for(int i:finalans) cout<<i+1<<" ";
     // cout<<endl;
-
+    // cout<<totalanssum<<endl; //640
     cout << finalans.size() << " "; //为什么只有一个输出但是输出很多行？位置错了
     for (int i = 0; i < finalans.size() - 1; i++)
     {
@@ -106,10 +100,6 @@ void dfs(int d, int c)
     }
     if (ifans)
     {
-        // cout << c << endl;
-        // for(int i:ans) cout<<i+1<<" ";
-        // cout<<endl;
-        //不用储存同统一比较，直接此处比较
         int mysum = 0;
         for (auto p : ans)
         {
@@ -118,32 +108,27 @@ void dfs(int d, int c)
         }
         // cout << " " << d << " " << mysum << " " << totalanssum << endl; //totalsum一直是1000000
         //且所需的饲料剂量最少。
-        if (finalans.size() == 0 or (finalans.size() != 0 and finalans.size() > ans.size()))// or mysum < totalanssum)//size优先级别过高/低？
-
-            if (mysum < totalanssum) //这个优先级很难搞 放到上面or里面也可以
+        printf("%lx %lx %d\n",ans.size(),finalans.size(),mysum);
+        if (finalans.size() == 0 or (finalans.size() != 0 and finalans.size() > ans.size())) // or mysum < totalanssum)//size优先级别过高/低？
+            if ((mysum <= totalanssum and finalans.size()==0) or finalans.size()!=0)              //加上等于号就好了？ 应该改成比较一个数组，同等anssize下面比较                                          //这个优先级很难搞 放到上面or里面也可以
             {
                 // if (myifdictbetter(ans, finalans)) //注意顺序？
                 {
                     finalans = ans;      //只是qianfuzhi?
                     totalanssum = mysum; //加了这里sum变了，但是结果还是没有改变 但是这里没有加判断}
-                    //这里也忘记盘段数量 那个优先？这样做的话长度不同无法比较啊
-                    // finalans.clear();
-                    // for (int i = 0; i < ans.size(); i++)
-                    // {
-                    //     finalans.push_back(ans[i]);
-                    // }
                 }
             }
-            else if (finalans.size() == ans.size()) //漏掉了小于的情况?
+            else if (finalans.size() == ans.size()) //漏掉了小于的情况?  出问题的第五个点是size相同的
             {
+                cout<<"=="<<mysum<<" "<<totalanssum<<endl; //没进来
+
                 if (mysum < totalanssum)
                 {
-                    if (myifdictbetter(ans, finalans))
+                    // cout<<"=="<<mysum<<" "<<totalanssum<<endl; //没进来
+                    if ((myifdictbetter(ans, finalans) and mysum==totalanssum) or (mysum != totalanssum))//原来问题出在这里，卡字典序，没搞清楚优先级的关系，要先确定前面相等
                     {
                         finalans = ans;
                         totalanssum = mysum;
-                        // cout<<totalanssum<<endl;
-                        //没进来？ 上面没写
                     }
                 }
             }
