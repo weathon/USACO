@@ -61,18 +61,18 @@ int main(void)
             }
             if (up)
             {
-                graph[index][index - ] = 0;//和上次贪吃蛇一样的额问题
-                graph[j - 1][i] = 0;
+                graph[index][index - m] = 0;//和上次贪吃蛇一样的额问题
+                graph[index-m][index] = 0;
             }
             if (down)
             {
-                graph[i][j + 1] = 0;
-                graph[j + 1][i] = 0;
+                graph[index][index+m] = 0;
+                graph[index+m][index] = 0;
             }
             if (myright)
             {
-                graph[i + 1][j] = 0;
-                graph[j][i + 1] = 0;
+                graph[index+1][index] = 0;
+                graph[j][index + 1] = 0;
             }
             index++;
         }
