@@ -94,84 +94,188 @@ int main(void)
         {
             roomsizerecord[i][j] = biggeseroom[colorgraph[i][j]];
         }
-    int maxroomsizeafterpushawall = 0;
+    int maxroomsizeafterpushawall = 0; //吃了有电解液瓜子
     int tmpmax;
     int ansx, ansy, ansd;
-    for (int j = 1; j < n - 1; j++)
-    {
-        for (int i = 1; i < m - 1; i++)
+    { //这个顺序
+        for (int j = n; j >= 0; j--)
         {
-            int tong[4] = {1, 1, 1, 1};
-            for (int _ = 0; room[i][j][_] != 0; _++)
+            for (int i = 0; i < m; i++)
             {
-                tong[room[i][j][_]] = 0;
-            }
-            for (int _ = 0; _ < 4; _++)
-            {
-                if (tong[_])
+                // cout<<i<<j<<endl;
+                int tong[4] = {1, 1, 1, 1};
+                for (int _ = 0; room[i][j][_] != 0; _++)
                 {
-                    if (_ == 1) //上面有墙，要检测边界，每一个都要，直接从1开始？
+                    tong[room[i][j][_]] = 0;
+                }
+                for (int _ = 0; _ < 4; _++)
+                {
+                    if (tong[_])
                     {
-                        if (colorgraph[i][j] == colorgraph[i][j - 1])
-                            continue;
-                        tmpmax = roomsizerecord[i][j] + roomsizerecord[i][j - 1]; //相加的同时还要保证不是同一间房
-                        if (tmpmax > maxroomsizeafterpushawall)
+
+                        if (_ == 3 and i != 0) //这个反了?
                         {
-                            maxroomsizeafterpushawall = tmpmax;
-                            ansx = i;
-                            ansy = j;
-                            ansd = _;
+                            if (colorgraph[i][j] == colorgraph[i - 1][j])
+                                continue;
+
+                            tmpmax = roomsizerecord[i][j] + roomsizerecord[i - 1][j];
+                            if (tmpmax > maxroomsizeafterpushawall)
+                            {
+
+                                maxroomsizeafterpushawall = tmpmax;
+                                ansx = i;
+                                ansy = j;
+                                ansd = _;
+                            }
+                            else if (tmpmax = maxroomsizeafterpushawall)
+                            {
+                                if (i < ansx)
+                                {
+                                    ansx = i;
+                                    ansy = j;
+                                    ansd = _;
+                                }
+                                else if (i == ansx and j > ansy)
+                                {
+                                    ansx = i;
+                                    ansy = j;
+                                    ansd = _; //qq用我的手机下东西，电池用到最后一pa
+                                }
+                                else if (j == ansy)
+                                {
+                                    if (_ < ansd)
+                                    {
+                                        ansx = i;
+                                        ansy = j;
+                                        ansd = _;
+                                    }
+                                }
+                            }
                         }
-                    }
-                    else if (_ == 2)
-                    {
-                        if (colorgraph[i][j] == colorgraph[i][j + 1])
-                            continue;
-
-                        tmpmax = roomsizerecord[i][j] + roomsizerecord[i][j + 1];
-                        if (tmpmax > maxroomsizeafterpushawall)
+                        else if (_ == 4 and i != m - 1)
                         {
-                            maxroomsizeafterpushawall = tmpmax;
-                            ansx = i;
-                            ansy = j;
-                            ansd = _;
+                            if (colorgraph[i][j] == colorgraph[i + 1][j])
+                                continue;
+
+                            tmpmax = roomsizerecord[i][j] + roomsizerecord[i + 1][j];
+
+                            if (tmpmax > maxroomsizeafterpushawall)
+                            {
+
+                                maxroomsizeafterpushawall = tmpmax;
+                                ansx = i;
+                                ansy = j;
+                                ansd = _;
+                            }
+                            else if (tmpmax = maxroomsizeafterpushawall)
+                            {
+                                if (i < ansx)
+                                {
+                                    ansx = i;
+                                    ansy = j;
+                                    ansd = _;
+                                }
+                                else if (i == ansx and j > ansy)
+                                {
+                                    ansx = i;
+                                    ansy = j;
+                                    ansd = _; //qq用我的手机下东西，电池用到最后一pa
+                                }
+                                else if (j == ansy)
+                                {
+                                    if (_ < ansd)
+                                    {
+                                        ansx = i;
+                                        ansy = j;
+                                        ansd = _;
+                                    }
+                                }
+                            }
                         }
-                    }
-                    else if (_ == 3)
-                    {
-                        if (colorgraph[i][j] == colorgraph[i - 1][j])
-                            continue;
-
-                        tmpmax = roomsizerecord[i][j] + roomsizerecord[i - 1][j];
-                        if (tmpmax > maxroomsizeafterpushawall)
+                        if (_ == 1 and j != 0) //上面有墙，要检测边界，每一个都要，直接从1开始？没考虑横向的问题
                         {
-                            maxroomsizeafterpushawall = tmpmax;
-                            ansx = i;
-                            ansy = j;
-                            ansd = _;
+                            if (colorgraph[i][j] == colorgraph[i][j - 1])
+                                continue;
+                            tmpmax = roomsizerecord[i][j] + roomsizerecord[i][j - 1]; //相加的同时还要保证不是同一间房
+                            if (tmpmax > maxroomsizeafterpushawall)
+                            {
+
+                                maxroomsizeafterpushawall = tmpmax;
+                                ansx = i;
+                                ansy = j;
+                                ansd = _;
+                            }
+                            else if (tmpmax = maxroomsizeafterpushawall)
+                            {
+                                if (i < ansx)
+                                {
+                                    ansx = i;
+                                    ansy = j;
+                                    ansd = _;
+                                }
+                                else if (i == ansx and j > ansy)
+                                {
+                                    ansx = i;
+                                    ansy = j;
+                                    ansd = _; //qq用我的手机下东西，电池用到最后一pa
+                                }
+                                else if (j == ansy)
+                                {
+                                    if (_ < ansd)
+                                    {
+                                        ansx = i;
+                                        ansy = j;
+                                        ansd = _;
+                                    }
+                                }
+                            }
                         }
-                    }
-                    else if (_ == 4)
-                    {
-                        if (colorgraph[i][j] == colorgraph[i + 1][j])
-                            continue;
-
-                        tmpmax = roomsizerecord[i][j] + roomsizerecord[i + 1][j];
-
-                        if (tmpmax > maxroomsizeafterpushawall)
+                        else if (_ == 2 and j != n - 1)
                         {
-                            maxroomsizeafterpushawall = tmpmax;
-                            ansx = i;
-                            ansy = j;
-                            ansd = _;
+                            if (colorgraph[i][j] == colorgraph[i][j + 1])
+                                continue;
+
+                            tmpmax = roomsizerecord[i][j] + roomsizerecord[i][j + 1];
+                            if (tmpmax > maxroomsizeafterpushawall)
+                            {
+
+                                maxroomsizeafterpushawall = tmpmax;
+                                ansx = i;
+                                ansy = j;
+                                ansd = _;
+                            }
+                            else if (tmpmax = maxroomsizeafterpushawall)
+                            {
+                                if (i < ansx)
+                                {
+                                    ansx = i;
+                                    ansy = j;
+                                    ansd = _;
+                                }
+                                else if (i == ansx and j > ansy)
+                                {
+                                    ansx = i;
+                                    ansy = j;
+                                    ansd = _; //qq用我的手机下东西，电池用到最后一pa
+                                }
+                                else if (j == ansy)
+                                {
+                                    if (_ < ansd)
+                                    {
+                                        ansx = i;
+                                        ansy = j;
+                                        ansd = _;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
         }
     }
-    cout << maxroomsizeafterpushawall << endl; //大小统计每一个都差1（？？）
-    cout<<ansx<<" "<<ansy<<endl;//答案是对的，但有很多个解（显而易见）
+    cout << maxroomsizeafterpushawall << endl;   //大小统计每一个都差1（？？）
+    cout << ansy + 1 << " " << ansx + 1 << endl; //答案是对的，但有很多个解（显而易见）改变方向加等于就好了
     return 0;
 }
 
