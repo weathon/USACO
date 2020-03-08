@@ -72,15 +72,21 @@ int main(void)
     for (int j = 0; j < n; j++)
         for (int i = 0; i < m; i++)
             dfs(i, j, roomcounter, 0);
-    cout << roomcounter -1<< endl;//由于是1开始计算，所以-1
-    //找最大的可以用堆
-    int mymax=0;
-    for(int i=1;i<=roomcounter;i++)
+    cout << roomcounter - 1 << endl; //由于是1开始计算，所以-1
+                                     //找最大的可以用堆
+    for (int i = 0; i < n; i++)
     {
-        if(biggeseroom[i]>mymax)
-            mymax=biggeseroom[i];
+        for (int j = 0; j < m; j++)
+            cout << colorgraph[j][i] << " ";
+        cout << endl;
     }
-    cout<<mymax<<endl;
+    int mymax = 0;
+    for (int i = 1; i <= roomcounter; i++)
+    {
+        if (biggeseroom[i] > mymax)
+            mymax = biggeseroom[i];
+    }
+    cout << mymax << endl;
     return 0;
 }
 
@@ -88,19 +94,19 @@ void dfs(int x, int y, int color, int deepth)
 {
     if (colorgraph[x][y] == 0)
     {
+        colorgraph[x][y] = color;
+        biggeseroom[color]++; //这个应该放外面 通过看到有一个0发现的  其实没有跨越墙壁，目前答案是正确的，手工验证出错
         // cout<<x<<" "<<y<<" "<<pointerlist[x][y]<<endl;  有一个0可能是越界 没有越界检测？
-        for (int _ = 0; _ < pointerlist[x][y]; _++)
+        for (int _ = 0; room[x][y][_] != 0; _++)
         {
-            colorgraph[x][y] = color;
-            biggeseroom[color]++;
             if (room[x][y][_] == 1)
-                dfs(x, y-1, color, deepth + 1);
+                dfs(x, y - 1, color, deepth + 1);
             if (room[x][y][_] == 2)
-                dfs(x , y+1, color, deepth + 1);
+                dfs(x, y + 1, color, deepth + 1);
             if (room[x][y][_] == 3)
-                dfs(x-1, y, color, deepth + 1);
+                dfs(x - 1, y, color, deepth + 1);
             if (room[x][y][_] == 4)
-                dfs(x+1, y, color, deepth + 1);
+                dfs(x + 1, y, color, deepth + 1);
         }
         if (deepth == 0)
         {
