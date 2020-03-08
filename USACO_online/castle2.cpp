@@ -34,7 +34,7 @@ int main(void)
     // if(!test)
     // {
         freopen("castle.in", "r", stdin);
-        // freopen("castle.out", "w", stdout);
+        freopen("castle.out", "w", stdout);
     // }
     cin >> m >> n;
     for (int j = 0; j < n; j++) //调换了ij没调换mn？
