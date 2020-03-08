@@ -5,6 +5,7 @@ int tmp;
 
 int main()
 {
-    cout<<(1&(4>>2))<<endl;
+    int a=8,b=8,c;
+    c=8;
     return 0;
 }
