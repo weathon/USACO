@@ -74,12 +74,13 @@ int main(void)
             dfs(i, j, roomcounter, 0);
     cout << roomcounter -1<< endl;//由于是1开始计算，所以-1
     //找最大的可以用堆
-    // for (int i = 0; i < m; i++)
-    // {
-    //     for (int j = 0; j < n; j++)
-    //         cout << colorgraph[i][j] << " ";
-    //     cout<<endl;
-    // }
+    int mymax=0;
+    for(int i=1;i<=roomcounter;i++)
+    {
+        if(biggeseroom[i]>mymax)
+            mymax=biggeseroom[i];
+    }
+    cout<<mymax<<endl;
     return 0;
 }
 
