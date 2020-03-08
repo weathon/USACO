@@ -22,7 +22,7 @@ int room[60][60][5]; //最后储存可以去的方向，不是桶 上下左右�
 int tmppointer;
 void dfs(int, int, int, int);
 int roomcounter = 1;
-
+int roomsizerecord[60][60];
 int pointerlist[60][60];
 
 int colorgraph[60][60];
@@ -74,12 +74,12 @@ int main(void)
             dfs(i, j, roomcounter, 0);
     cout << roomcounter - 1 << endl; //由于是1开始计算，所以-1
                                      //找最大的可以用堆
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-            cout << colorgraph[j][i] << " ";
-        cout << endl;
-    }
+    // for (int i = 0; i < n; i++)
+    // {
+    //     for (int j = 0; j < m; j++)
+    //         cout << colorgraph[j][i] << " ";
+    //     cout << endl;
+    // }
     int mymax = 0;
     for (int i = 1; i <= roomcounter; i++)
     {
@@ -87,6 +87,91 @@ int main(void)
             mymax = biggeseroom[i];
     }
     cout << mymax << endl;
+
+    //将序号填充为大小，打通时直接加两边, 不用dfs解决
+    for (int j = 0; j < n; j++)
+        for (int i = 0; i < m; i++)
+        {
+            roomsizerecord[i][j] = biggeseroom[colorgraph[i][j]];
+        }
+    int maxroomsizeafterpushawall = 0;
+    int tmpmax;
+    int ansx, ansy, ansd;
+    for (int j = 1; j < n - 1; j++)
+    {
+        for (int i = 1; i < m - 1; i++)
+        {
+            int tong[4] = {1, 1, 1, 1};
+            for (int _ = 0; room[i][j][_] != 0; _++)
+            {
+                tong[room[i][j][_]] = 0;
+            }
+            for (int _ = 0; _ < 4; _++)
+            {
+                if (tong[_])
+                {
+                    if (_ == 1) //上面有墙，要检测边界，每一个都要，直接从1开始？
+                    {
+                        if (colorgraph[i][j] == colorgraph[i][j - 1])
+                            continue;
+                        tmpmax = roomsizerecord[i][j] + roomsizerecord[i][j - 1]; //相加的同时还要保证不是同一间房
+                        if (tmpmax > maxroomsizeafterpushawall)
+                        {
+                            maxroomsizeafterpushawall = tmpmax;
+                            ansx = i;
+                            ansy = j;
+                            ansd = _;
+                        }
+                    }
+                    else if (_ == 2)
+                    {
+                        if (colorgraph[i][j] == colorgraph[i][j + 1])
+                            continue;
+
+                        tmpmax = roomsizerecord[i][j] + roomsizerecord[i][j + 1];
+                        if (tmpmax > maxroomsizeafterpushawall)
+                        {
+                            maxroomsizeafterpushawall = tmpmax;
+                            ansx = i;
+                            ansy = j;
+                            ansd = _;
+                        }
+                    }
+                    else if (_ == 3)
+                    {
+                        if (colorgraph[i][j] == colorgraph[i - 1][j])
+                            continue;
+
+                        tmpmax = roomsizerecord[i][j] + roomsizerecord[i - 1][j];
+                        if (tmpmax > maxroomsizeafterpushawall)
+                        {
+                            maxroomsizeafterpushawall = tmpmax;
+                            ansx = i;
+                            ansy = j;
+                            ansd = _;
+                        }
+                    }
+                    else if (_ == 4)
+                    {
+                        if (colorgraph[i][j] == colorgraph[i + 1][j])
+                            continue;
+
+                        tmpmax = roomsizerecord[i][j] + roomsizerecord[i + 1][j];
+
+                        if (tmpmax > maxroomsizeafterpushawall)
+                        {
+                            maxroomsizeafterpushawall = tmpmax;
+                            ansx = i;
+                            ansy = j;
+                            ansd = _;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    cout << maxroomsizeafterpushawall << endl; //大小统计每一个都差1（？？）
+    cout<<ansx<<" "<<ansy<<endl;//答案是对的，但有很多个解（显而易见）
     return 0;
 }
 
