@@ -26,6 +26,7 @@ int roomcounter = 1;
 int pointerlist[60][60];
 
 int colorgraph[60][60];
+int biggeseroom[4000];
 
 int main(void)
 {
@@ -71,7 +72,8 @@ int main(void)
     for (int j = 0; j < n; j++)
         for (int i = 0; i < m; i++)
             dfs(i, j, roomcounter, 0);
-    cout << roomcounter << endl;
+    cout << roomcounter -1<< endl;//由于是1开始计算，所以-1
+    //找最大的可以用堆
     // for (int i = 0; i < m; i++)
     // {
     //     for (int j = 0; j < n; j++)
@@ -89,6 +91,7 @@ void dfs(int x, int y, int color, int deepth)
         for (int _ = 0; _ < pointerlist[x][y]; _++)
         {
             colorgraph[x][y] = color;
+            biggeseroom[color]++;
             if (room[x][y][_] == 1)
                 dfs(x, y-1, color, deepth + 1);
             if (room[x][y][_] == 2)
