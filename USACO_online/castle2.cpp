@@ -1,11 +1,11 @@
 /*
 ID: wguo6352
 TASK: castle
-LANG: C++14                 
+LANG: C++11                 
 */
 
 #include <iostream>
-#include <stack>
+// #include <stack>
 #include <vector>
 #include <set>
 #include <string>
@@ -17,7 +17,8 @@ using namespace std;
 int m, n;
 int tmp;
 bool myup, mydown, myright, myleft;
-
+int cc;
+// bool test=false;
 int room[60][60][5]; //最后储存可以去的方向，不是桶 上下左右分别用1234表示
 int tmppointer;
 void dfs(int, int, int, int);
@@ -30,8 +31,11 @@ int biggeseroom[4000];
 
 int main(void)
 {
-    freopen("castle.in", "r", stdin);
-    // freopen("castle.out", "w", stdout);
+    // if(!test)
+    // {
+        freopen("castle.in", "r", stdin);
+        // freopen("castle.out", "w", stdout);
+    // }
     cin >> m >> n;
     for (int j = 0; j < n; j++) //调换了ij没调换mn？
     {
@@ -94,193 +98,117 @@ int main(void)
         {
             roomsizerecord[i][j] = biggeseroom[colorgraph[i][j]];
         }
+
+    // for (int i = 0; i < n; i++)
+    // {
+    //     for (int j = 0; j < m; j++)
+    //         cout << roomsizerecord[j][i] << " ";
+    //     cout << endl;
+    // }  没问题
+
     int maxroomsizeafterpushawall = 0; //吃了有电解液瓜子
     int tmpmax;
     int ansx, ansy, ansd;
-    { //这个顺序
-        for (int j = n; j >= 0; j--)
+    {
         {
-            for (int i = 0; i < m; i++)
-            {
-                // cout<<i<<j<<endl;
-                int tong[4] = {1, 1, 1, 1};
-                for (int _ = 0; room[i][j][_] != 0; _++)
+            for (int i = m - 1; i >= 0; i--)
+                for (int j = 0; j < n; j++)
+
                 {
-                    tong[room[i][j][_]] = 0;
-                }
-                for (int _ = 0; _ < 4; _++)
-                {
-                    if (tong[_])
+                    // cout<<i<<" "<<j<<endl;
+                    int tong[5] = {1, 1, 1, 1,1};
+                    for (int _ = 0; room[i][j][_] != 0; _++)
                     {
-
-                        if (_ == 3 and i != 0) //这个反了?
+                        tong[room[i][j][_]-1] = 0;//还是这里错了，后面改成从0开始这里没有了，忘了全部改，usaco的爆栈错误
+                    }
+                    for (int _ = 4; _ >= 0; _--) //这里顺序要反过来
+                    {                            //重大问题，忘记了这个是哪里开始的  其实只要枚举上和右
+                        // _++;  同时两个地方
+                        if (tong[_])
                         {
-                            if (colorgraph[i][j] == colorgraph[i - 1][j])
-                                continue;
-
-                            tmpmax = roomsizerecord[i][j] + roomsizerecord[i - 1][j];
-                            if (tmpmax > maxroomsizeafterpushawall)
+                            if (_ == 2 and i != 0) //这个反了? 写成i了?
                             {
+                                if (colorgraph[i][j] == colorgraph[i - 1][j])
+                                    continue;
 
-                                maxroomsizeafterpushawall = tmpmax;
-                                ansx = i;
-                                ansy = j;
-                                ansd = _;
-                            }
-                            else if (tmpmax = maxroomsizeafterpushawall)
-                            {
-                                if (i < ansx)
+                                tmpmax = roomsizerecord[i][j] + roomsizerecord[i - 1][j];
+                                if (tmpmax >= maxroomsizeafterpushawall)
                                 {
+
+                                    maxroomsizeafterpushawall = tmpmax;
                                     ansx = i;
                                     ansy = j;
                                     ansd = _;
                                 }
-                                else if (i == ansx and j > ansy)
-                                {
-                                    ansx = i;
-                                    ansy = j;
-                                    ansd = _; //qq用我的手机下东西，电池用到最后一pa
-                                }
-                                else if (j == ansy)
-                                {
-                                    if (_ < ansd)
-                                    {
-                                        ansx = i;
-                                        ansy = j;
-                                        ansd = _;
-                                    }
-                                }
                             }
-                        }
-                        else if (_ == 4 and i != m - 1)
-                        {
-                            if (colorgraph[i][j] == colorgraph[i + 1][j])
-                                continue;
-
-                            tmpmax = roomsizerecord[i][j] + roomsizerecord[i + 1][j];
-
-                            if (tmpmax > maxroomsizeafterpushawall)
+                            if (_ == 3 and i != m - 1)
                             {
+                                // cout<<i<<" "<<j<<endl;
 
-                                maxroomsizeafterpushawall = tmpmax;
-                                ansx = i;
-                                ansy = j;
-                                ansd = _;
-                            }
-                            else if (tmpmax = maxroomsizeafterpushawall)
-                            {
-                                if (i < ansx)
+                                if (colorgraph[i][j] == colorgraph[i + 1][j])
+                                    continue;
+
+                                tmpmax = roomsizerecord[i][j] + roomsizerecord[i + 1][j];
+
+                                if (tmpmax >= maxroomsizeafterpushawall)
                                 {
+                                    maxroomsizeafterpushawall = tmpmax;
                                     ansx = i;
                                     ansy = j;
                                     ansd = _;
                                 }
-                                else if (i == ansx and j > ansy)
-                                {
-                                    ansx = i;
-                                    ansy = j;
-                                    ansd = _; //qq用我的手机下东西，电池用到最后一pa
-                                }
-                                else if (j == ansy)
-                                {
-                                    if (_ < ansd)
-                                    {
-                                        ansx = i;
-                                        ansy = j;
-                                        ansd = _;
-                                    }
-                                }
                             }
-                        }
-                        if (_ == 1 and j != 0) //上面有墙，要检测边界，每一个都要，直接从1开始？没考虑横向的问题
-                        {
-                            if (colorgraph[i][j] == colorgraph[i][j - 1])
-                                continue;
-                            tmpmax = roomsizerecord[i][j] + roomsizerecord[i][j - 1]; //相加的同时还要保证不是同一间房
-                            if (tmpmax > maxroomsizeafterpushawall)
+                            if (_ == 0 and j != 0) //上面有墙，要检测边界，每一个都要，直接从1开始？没考虑横向的问题
                             {
-
-                                maxroomsizeafterpushawall = tmpmax;
-                                ansx = i;
-                                ansy = j;
-                                ansd = _;
-                            }
-                            else if (tmpmax = maxroomsizeafterpushawall)
-                            {
-                                if (i < ansx)
+                                if (colorgraph[i][j] == colorgraph[i][j - 1])
+                                    continue;
+                                tmpmax = roomsizerecord[i][j] + roomsizerecord[i][j - 1]; //相加的同时还要保证不是同一间房
+                                if (tmpmax >= maxroomsizeafterpushawall)
                                 {
+                                    maxroomsizeafterpushawall = tmpmax;
                                     ansx = i;
                                     ansy = j;
                                     ansd = _;
                                 }
-                                else if (i == ansx and j > ansy)
-                                {
-                                    ansx = i;
-                                    ansy = j;
-                                    ansd = _; //qq用我的手机下东西，电池用到最后一pa
-                                }
-                                else if (j == ansy)
-                                {
-                                    if (_ < ansd)
-                                    {
-                                        ansx = i;
-                                        ansy = j;
-                                        ansd = _;
-                                    }
-                                }
                             }
-                        }
-                        else if (_ == 2 and j != n - 1)
-                        {
-                            if (colorgraph[i][j] == colorgraph[i][j + 1])
-                                continue;
-
-                            tmpmax = roomsizerecord[i][j] + roomsizerecord[i][j + 1];
-                            if (tmpmax > maxroomsizeafterpushawall)
+                            else if (_ == 1 and j != n - 1)
                             {
+                                if (colorgraph[i][j] == colorgraph[i][j + 1])
+                                    continue;
 
-                                maxroomsizeafterpushawall = tmpmax;
-                                ansx = i;
-                                ansy = j;
-                                ansd = _;
-                            }
-                            else if (tmpmax = maxroomsizeafterpushawall)
-                            {
-                                if (i < ansx)
+                                tmpmax = roomsizerecord[i][j] + roomsizerecord[i][j + 1];
+                                if (tmpmax >= maxroomsizeafterpushawall)
                                 {
+                                    maxroomsizeafterpushawall = tmpmax;
                                     ansx = i;
                                     ansy = j;
                                     ansd = _;
                                 }
-                                else if (i == ansx and j > ansy)
-                                {
-                                    ansx = i;
-                                    ansy = j;
-                                    ansd = _; //qq用我的手机下东西，电池用到最后一pa
-                                }
-                                else if (j == ansy)
-                                {
-                                    if (_ < ansd)
-                                    {
-                                        ansx = i;
-                                        ansy = j;
-                                        ansd = _;
-                                    }
-                                }
                             }
                         }
+                        // _--;
                     }
                 }
-            }
         }
     }
-    cout << maxroomsizeafterpushawall << endl;   //大小统计每一个都差1（？？）
-    cout << ansy + 1 << " " << ansx + 1 << endl; //答案是对的，但有很多个解（显而易见）改变方向加等于就好了
+    cout << maxroomsizeafterpushawall << endl; //大小统计每一个都差1（？？）
+    char ansdd;
+    if (ansd == 0)
+        ansdd = 'N';
+    if (ansd == 1)
+        ansdd = 'S'; //看了答案
+    if (ansd == 2)
+        ansdd = 'W';
+    if (ansd == 3)
+        ansdd = 'E';
+    cout << ansy + 1 << " " << ansx + 1 << " " << ansdd << endl; //答案是对的，但有很多个解（显而易见）改变方向加等于就好了
+    // cout<<cc<<endl;
     return 0;
 }
-
 void dfs(int x, int y, int color, int deepth)
 {
+    // dfs(x,y,color,deepth+1);
+    cc++;
     if (colorgraph[x][y] == 0)
     {
         colorgraph[x][y] = color;
@@ -288,13 +216,13 @@ void dfs(int x, int y, int color, int deepth)
         // cout<<x<<" "<<y<<" "<<pointerlist[x][y]<<endl;  有一个0可能是越界 没有越界检测？
         for (int _ = 0; room[x][y][_] != 0; _++)
         {
-            if (room[x][y][_] == 1)
+            if (room[x][y][_] == 1 and colorgraph[x][y - 1] == 0)
                 dfs(x, y - 1, color, deepth + 1);
-            if (room[x][y][_] == 2)
+            if (room[x][y][_] == 2 and colorgraph[x][y + 1] == 0)
                 dfs(x, y + 1, color, deepth + 1);
-            if (room[x][y][_] == 3)
+            if (room[x][y][_] == 3 and colorgraph[x - 1][y] == 0)
                 dfs(x - 1, y, color, deepth + 1);
-            if (room[x][y][_] == 4)
+            if (room[x][y][_] == 4 and colorgraph[x + 1][y] == 0)
                 dfs(x + 1, y, color, deepth + 1);
         }
         if (deepth == 0)
