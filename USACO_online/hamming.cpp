@@ -22,11 +22,12 @@ int main()
     cin >> n >> b >> d;
     // cout<<hammingd(n,d)<<endl;
     ans.push_back(0);
-    int count;
+    int count=0;//init
     bool ifans;
-    for (int testnum = 1;true; testnum++) //0默认是答案了
+    for (int testnum = 1; true; testnum++) //0默认是答案了
     {
-        if (count >= n)
+        // cout<<count<<endl;
+        if (count >= n-1)//忘了-1,一直死循环？
             break;
         ifans = true;
         for (auto num : ans)
