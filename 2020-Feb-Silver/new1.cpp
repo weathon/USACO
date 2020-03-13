@@ -24,7 +24,7 @@ bool ifsame(int A[200000], int B[200000])
 int times;
 int main()
 {
-    // freopen("swap.in", "r", stdin);
+    freopen("swap.in", "r", stdin);
     // freopen("swap.out", "w", stdout);
     cin >> N >> M >> K;
     for (int i = 1; i <= M; i++)
@@ -56,9 +56,11 @@ int main()
     int att = 0;
     for (int times = 1; times <= K; times++)
     {
-        if (ifsame(ref, cows[times % 2]) and times != 1)
+        // cout<<times<<endl;
+        if (ifsame(ref, cows[(times-1) % 2]) and times != 1)//漏了-1
         {
             samema = times - 1;
+            cout<<samema<<endl;
             break;
         }
         // for (int i = 1; i <= M; i++)
@@ -81,7 +83,7 @@ int main()
             // {
             //     cout << cows[(att) % 2][i] << " ";
             // }
-            // cout << endl;  完全没有进来
+            // cout << endl; 
 
             for (int i = 0; i <= N; i++)
             {
