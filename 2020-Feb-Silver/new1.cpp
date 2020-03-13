@@ -24,7 +24,7 @@ bool ifsame(int A[200000], int B[200000])
 int times;
 int main()
 {
-    freopen("swap.in", "r", stdin);
+    // freopen("swap.in", "r", stdin);
     // freopen("swap.out", "w", stdout);
     cin >> N >> M >> K;
     for (int i = 1; i <= M; i++)
@@ -48,20 +48,19 @@ int main()
             tmp = map[R - j + L];
             map[R - j + L] = map[j];
             map[j] = tmp; //太吵，写错了
-
         }
     }
 
     int samema = -1;
     // aatimes = 0;
-    int att=0;
+    int att = 0;
     for (int times = 1; times <= K; times++)
     {
-        // if (ifsame(ref, cows[times%2]) and times != 1)
-        // {
-        //     samema = times - 1;
-        //     break;
-        // }
+        if (ifsame(ref, cows[times % 2]) and times != 1)
+        {
+            samema = times - 1;
+            break;
+        }
         // for (int i = 1; i <= M; i++)
         // {
         // }
@@ -70,24 +69,33 @@ int main()
             cows[times % 2][i] = cows[(times - 1) % 2][map[i]];
         }
         // times++;
-        att=times;
+        att = times;
     }
     // times=0;
+    // cout<<samema<<endl;
     if (samema != -1)
     {
         for (int times = 1; times <= K % samema; times++)
         {
+            // for (int i = 1; i <= N; i++)
+            // {
+            //     cout << cows[(att) % 2][i] << " ";
+            // }
+            // cout << endl;  完全没有进来
+
             for (int i = 0; i <= N; i++)
             {
                 cows[times % 2][i] = cows[(times - 1) % 2][map[i]];
             }
-            times++;
+            // times++; 重复了
+            att = times;
         }
     }
     // cout<<times<<endl;
     for (int i = 1; i <= N; i++)
     {
-        cout << cows[(att) % 2][i] << endl;
+        cout << cows[(att) % 2][i] << " ";
     }
+    cout << endl;
     return 0;
 }
