@@ -25,7 +25,7 @@ int times;
 int main()
 {
     freopen("swap.in", "r", stdin);
-    freopen("swap.out", "w", stdout);
+    // freopen("swap.out", "w", stdout);
     cin >> N >> M >> K;
     for (int i = 1; i <= M; i++)
     {
