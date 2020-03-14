@@ -26,17 +26,16 @@ int main()
         cin >> numlist[i];
     for (int i = 0; i < N; i++)
         numlist2[i] = numlist[i];
-
-    sort(numlist, numlist + N);
-    int count = 0;
-    for (int i = 0; i < N; i++)
+    sort(numlist,numlist+N);
+    int count=0;
+    for(int i=0;i<N;i++)
     {
-        if (numlist2[i] != numlist[i])
+        if(numlist2[i]!=numlist[i])
         {
-            tong[i]=numlist2[i]-numlist[i];
-            //https://www.luogu.com.cn/problemnew/solution/P1459
+            count++;
         }
     }
-    cout << (count + 2) / 2 << endl;
+    cout<<(count+1)/2<<endl;
+    
     return 0;
 }
