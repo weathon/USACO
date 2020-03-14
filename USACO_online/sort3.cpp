@@ -28,8 +28,8 @@ int a[11][11];
 
 int main()
 {
-    // freopen("sort3.in", "r", stdin);
-    // freopen("sort3.out", "w", stdout);
+    freopen("sort3.in", "r", stdin);
+    freopen("sort3.out", "w", stdout);
     int N;
     cin >> N;
     for (int i = 0; i < N; i++)
@@ -63,7 +63,7 @@ int main()
     // {
         
     // }
-    count+=(a[2][1]+a[3][1]+a[3][2]-a[1][2]-a[1][3]-a[2][3]);
+    count+=abs(a[2][1]+a[3][1]+a[3][2]-a[1][2]-a[1][3]-a[2][3]);
     // if(sum!=0) 
 
     cout<<(count)/2<<endl;
@@ -71,3 +71,4 @@ int main()
     return 0;
 }
 // https://www.luogu.com.cn/problem/P1459
+// 出现了特殊情况，a[3][3]出现了数字，没事，看错了
