@@ -1,4 +1,4 @@
-/*
+    /*
 ID: wguo6352
 TASK: sort3
 LANG: C++14                 
@@ -7,12 +7,22 @@ LANG: C++14
 #include <fstream>
 #include <string>
 #include <cmath>
+#include <vector>
 #include <algorithm>
 using namespace std;
 
 int numlist[2000];
 int numlist2[2000];
 int tong[2000];
+int difference[2000];
+// int Atong[2000];
+// int Btong[2000];
+// int Ctong[2000];
+
+// vector <int> A,B,C;
+int a[11][11];
+// int b[4][4];
+// int c[4][4];
 
 // bool a(int i,int j){ return i>j;}
 
@@ -33,9 +43,31 @@ int main()
         if(numlist2[i]!=numlist[i])
         {
             count++;
+            // if(numlist[i]==1)
+            // {
+            //     A.push_back(numlist[i]);
+            // }
+            // else if(numlist[i]==2)
+            // {
+            //     B.push_back(numlist2[i]);
+            // } 
+            // else if(numlist[i]==3)
+            // {
+            //     C.push_back(numlist2[i]);
+            // }
+            a[numlist2[i]][numlist[i]]++;
         }
     }
-    cout<<(count+1)/2<<endl;
+    // int sum=0;
+    // for(int i=0;i<N;i++)
+    // {
+        
+    // }
+    count+=(a[2][1]+a[3][1]+a[3][2]-a[1][2]-a[1][3]-a[2][3]);
+    // if(sum!=0) 
+
+    cout<<(count)/2<<endl;
     
     return 0;
 }
+// https://www.luogu.com.cn/problem/P1459
