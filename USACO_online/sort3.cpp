@@ -1,4 +1,4 @@
-    /*
+/*
 ID: wguo6352
 TASK: sort3
 LANG: C++14                 

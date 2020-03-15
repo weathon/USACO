@@ -12,8 +12,8 @@ long long f[4000];
 
 int main()
 {
-    // freopen("subset.in","r",stdin);
-    // freopen("subset.out","w",stdout);
+    freopen("subset.in","r",stdin);
+    freopen("subset.out","w",stdout);
 
     cin >> N;
     int supposesum; //ses
