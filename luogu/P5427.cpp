@@ -78,45 +78,46 @@ int main(void)
     }
 
     // vector <int> truecount;
-    int truex=-1;
-    int truey=-1;
-    int truecount=0;
-    int firstf=-1,firsts=-1;
-    int firsttime=0;
-    int ansx=-1,ansy=-1;
+    // int truex=-1;
+    // int truey=-1;
+    // int truecount=0;
+    // int firstf=-1,firsts=-1;
+    // int firsttime=0;
+    // int ansx=-1,ansy=-1;
+    // int lastj;int lasti;
+    //翻转就有问题
     for(int i=1;i<N;i++)
     {
+        int count=0;
         for(int j=1;j<N;j++)
         {
-            if(array[i][j]==true)
-            {
-                truecount++;
-                if(truex==-1) truex=i;
-                if(truey==-1) truey=j;
-                if(truex==i)
-                {
-                    firstf=i;
-                }
-                if(truey==j)
-                {
-                    firsts=i;
-                }
-                if(firsttime==0)
-                {
-                    firsttime=1;
-                    ansx=i;
-                    ansy=j;
-                }
-            }
+            if(array[i][j])
+            count++;
+            // lastj=j;
+        }
+        if(count==N-1)
+        {
+            cout<<i+1<<" 1"<<endl;
+            return 0;
         }
     }
-    if(firsts!=-1) cout<<"1 "<<firsts+1<<endl;
-    else if(firstf!=-1) cout<<firstf+1<<" 1"<<endl;
-    else if(ansx!=-1){
-        cout<<ansx+1<<" "<<ansy+1<<endl;
-    }
-    else{
-        cout<<-1<<endl;
+    for(int j=1;j<N;j++)
+    {
+        // cout<<j<<endl;  重新编译还是输出？ 有错误没看到
+        int count=0;
+        for(int i=1;i<N;i++)
+        {
+            if(array[i][j])
+            {
+                count++;
+            }
+            // lasti=i;
+        }
+        if(count==N-1)
+        {
+            cout<<"1 "<<j+1<<endl;//why +2, ij consued?
+            return 0;
+        }
     }
     return 0;
 }
