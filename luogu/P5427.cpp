@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<fstream>
 using namespace std;
 
 int N;
@@ -25,6 +26,9 @@ char tmp;
 
 int main(void)
 {
+    freopen("leftout.in","r",stdin);
+    freopen("leftout.out","w",stdout);
+
     cin>>N;
     for(int i=0;i<N;i++)
         for(int j=0;j<N;j++)
@@ -91,7 +95,7 @@ int main(void)
         int count=0;
         for(int j=1;j<N;j++)
         {
-            if(array[i][j])
+            if(array[i][j]==false)//一直以为是true
             count++;
             // lastj=j;
         }
@@ -107,7 +111,7 @@ int main(void)
         int count=0;
         for(int i=1;i<N;i++)
         {
-            if(array[i][j])
+            if(array[i][j]==false)
             {
                 count++;
             }
@@ -119,5 +123,22 @@ int main(void)
             return 0;
         }
     }
+    int count=0,ansx,ansy;//漏了=0
+    for(int i=1;i<N;i++)
+    {
+        for(int j=1;j<N;j++)
+        {
+            if(!array[i][j])
+            {
+                // cout<<i+1<<" "<<j+1<<endl;
+                ansx=i+1;
+                ansy=j+1;
+                // return 0;
+                count++;
+            }
+        }
+    }
+    if(count!=1) cout<<-1<<endl;//漏了
+    else cout<<ansx<<" "<<ansy<<endl;
     return 0;
 }
