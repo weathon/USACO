@@ -21,13 +21,13 @@ int mytree[100005];
 int tmp1, tmp2;
 // vector<int> asatring;
 int the_number_where_it_got_different = -1;
-
+int myroot;
 vector<int> astring;
 vector<int> bstring;
 
 int main()
 {
-    // freopen("P5836.in", "r", stdin);原来是这个
+    // freopen("P5836.in", "r", stdin);//原来是这个
     cin >> N >> M;
     for (int i = 1; i <= N; i++) //还是弄错
     {
@@ -47,19 +47,25 @@ int main()
         astring.clear();
         bstring.clear();
         int pointer = A[i];
-        while (pointer != 1)
+        while (pointer!=0)//0相当于NULL
+        {
+            pointer = mytree[pointer];
+            myroot=pointer;
+        }
+        pointer = A[i];
+        while (pointer != myroot)
         {
             astring.push_back(pointer); //分不清A和mytree
             pointer = mytree[pointer];  //把pointer携程A[i] 警告
         }
-        astring.push_back(1);
+        astring.push_back(myroot);
         pointer = B[i];
-        while (pointer != 1)
+        while (pointer != myroot)
         {
             bstring.push_back(pointer); //分不清A和mytree
             pointer = mytree[pointer];  //把pointer携程A[i] 警告
         }
-        bstring.push_back(1);
+        bstring.push_back(myroot);
         reverse(astring.begin(), astring.end());
         reverse(bstring.begin(), bstring.end());
         the_number_where_it_got_different = -1;
@@ -71,10 +77,12 @@ int main()
                 the_number_where_it_got_different = astring[ii - 1];
             }
         }
-        if (the_number_where_it_got_different == -1)
-            return -100;
+        
+        // if (the_number_where_it_got_different == -1)
+            // cout<<"error";
+            // return -1;//去掉这个反而AC了一个点
         bool mystart = false;
-        int ans=0;
+        int ans = 0;
         for (auto ii : astring)
         {
             if (ii == the_number_where_it_got_different)
