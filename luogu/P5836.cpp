@@ -41,10 +41,10 @@ int main()
     bool ans;
     int tmp3, tmp4;
 
-    vector <int> bstring;//a在里面，b在外面就没事？？？？？？？？？？？？？
     for (int i = 0; i < M; i++)
     {
     vector <int> astring; //为什么这个放在外面就RE?
+    vector <int> bstring;//a在里面，b在外面就没事？？？？？？？？？？？？？
 
         astring.clear();
         bstring.clear();
@@ -79,7 +79,7 @@ int main()
         ans = false;
         int myindex = 0;
         int equalmyindex;
-        for (int i = 0; i < min(bstring.size(), astring.size()); i++) //没考虑完全一样的情况
+        for (int i = 0; i <= min(bstring.size(), astring.size()); i++) //没考虑完全一样的情况
         {
             if (astring[astring.size() - i] != bstring[bstring.size() - i])
             {
