@@ -40,11 +40,11 @@ int main()
     }
     bool ans;
     int tmp3, tmp4;
-
-    for (int i = 0; i < M; i++)
-    {
     vector <int> astring; //为什么这个放在外面就RE?
     vector <int> bstring;//a在里面，b在外面就没事？？？？？？？？？？？？？
+    for (int i = 0; i < M; i++)
+    {
+
 
         astring.clear();
         bstring.clear();
