@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
+#include <fstream>
 using namespace std;
 
 int N, M;
@@ -19,46 +20,32 @@ int B[100005];
 int mytree[100005];
 int tmp1, tmp2;
 // vector<int> asatring;
+int the_number_where_it_got_different = -1;
+
+vector<int> astring;
+vector<int> bstring;
 
 int main()
 {
+    // freopen("P5836.in", "r", stdin);原来是这个
     cin >> N >> M;
-    // getchar();
     for (int i = 1; i <= N; i++) //还是弄错
     {
         cin >> which_kind_of_cows_farm_i_has[i];
     }
-    // getchar();
     for (int i = 0; i < N - 1; i++)
     {
         cin >> tmp1 >> tmp2;
-        mytree[tmp2] = tmp1; //反向查找，不用push了，只有一个？太麻烦，下面处理
+        mytree[tmp2] = tmp1;
     }
     for (int i = 0; i < M; i++)
     {
         cin >> A[i] >> B[i] >> which_kind_of_cows_i_like[i];
     }
-    bool ans;
-    int tmp3, tmp4;
-    vector <int> astring; //为什么这个放在外面就RE?
-    vector <int> bstring;//a在里面，b在外面就没事？？？？？？？？？？？？？
     for (int i = 0; i < M; i++)
     {
-
-
         astring.clear();
         bstring.clear();
-        if (A[i] == B[i])
-        {
-            if (which_kind_of_cows_farm_i_has[A[i]] == which_kind_of_cows_i_like[i])
-                putchar('1');
-            else
-            {
-                putchar('0');
-            }
-            continue;
-        }
-
         int pointer = A[i];
         while (pointer != 1)
         {
@@ -73,51 +60,52 @@ int main()
             pointer = mytree[pointer];  //把pointer携程A[i] 警告
         }
         bstring.push_back(1);
+        reverse(astring.begin(), astring.end());
+        reverse(bstring.begin(), bstring.end());
+        the_number_where_it_got_different = -1;
 
-        //从前往后扫描，扫到一样的就停止，然后
-        //Len of astring and bstring maight not be the same
-        ans = false;
-        int myindex = 0;
-        int equalmyindex;
-        for (int i = 0; i <= min(bstring.size(), astring.size()); i++) //没考虑完全一样的情况
+        for (int ii = 0; ii <= min(astring.size(), bstring.size()); ii++)
         {
-            if (astring[astring.size() - i] != bstring[bstring.size() - i])
+            if (astring[ii] != bstring[ii])
             {
-                equalmyindex = astring[astring.size() - i + 1];
-                break;
+                the_number_where_it_got_different = astring[ii - 1];
             }
         }
-
-        while (1)
+        if (the_number_where_it_got_different == -1)
+            return -100;
+        bool mystart = false;
+        int ans=0;
+        for (auto ii : astring)
         {
-            tmp3 = astring[myindex]; //似乎是这里溢出？
-            if (which_kind_of_cows_farm_i_has[tmp3] == which_kind_of_cows_i_like[i])
+            if (ii == the_number_where_it_got_different)
+                mystart = true;
+            if (mystart)
             {
-                ans = true;
-                break;
+                if (which_kind_of_cows_farm_i_has[ii] == which_kind_of_cows_i_like[i])
+                // cout << "1";
+                {
+                    ans = 1;
+                    break;
+                }
+                // continue;
             }
-            if (which_kind_of_cows_farm_i_has[tmp3] == equalmyindex)
-            {
-                break;
-            }
-            myindex++;
         }
-        myindex = 0;
-        while (1)
+        mystart = false;
+        for (auto ii : bstring)
         {
-            tmp4 = bstring[myindex];
-            if (which_kind_of_cows_farm_i_has[tmp4] == which_kind_of_cows_i_like[i])
+            if (ii == the_number_where_it_got_different)
+                mystart = true;
+            if (mystart)
             {
-                ans = true;
-                break;
+                if (which_kind_of_cows_farm_i_has[ii] == which_kind_of_cows_i_like[i])
+                {
+                    ans = 1;
+                    break;
+                }
+                // continue;
             }
-            if (which_kind_of_cows_farm_i_has[tmp4] == equalmyindex) //还是经常分不清索引和数值
-            {
-                break;
-            }
-            myindex++;
         }
-        printf("%d", ans);
+        cout << ans;
     }
     return 0;
 }
