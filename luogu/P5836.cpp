@@ -47,11 +47,12 @@ int main()
         astring.clear();
         bstring.clear();
         int pointer = A[i];
-        while (pointer!=0)//0相当于NULL
+        while (pointer != 0) //0相当于NULL
         {
             pointer = mytree[pointer];
-            myroot=pointer;
+            myroot = pointer;
         }
+        // cout<<myroot<<endl; 第一次root为1,第二次为0,所以TLE?
         pointer = A[i];
         while (pointer != myroot)
         {
@@ -77,10 +78,21 @@ int main()
                 the_number_where_it_got_different = astring[ii - 1];
             }
         }
-        
-        // if (the_number_where_it_got_different == -1)
-            // cout<<"error";
-            // return -1;//去掉这个反而AC了一个点
+
+        if (the_number_where_it_got_different == -1)
+        //完全相等
+        {
+            if(which_kind_of_cows_farm_i_has[A[i]]== which_kind_of_cows_i_like[i])
+            {
+                cout<<"1";
+            }
+            else{
+                cout<<"0";
+            }
+            continue;
+        }
+        // cout<<"error";
+        // return -1;//去掉这个反而AC了一个点
         bool mystart = false;
         int ans = 0;
         for (auto ii : astring)
