@@ -15,7 +15,10 @@
         "list": "cpp",
         "unordered_set": "cpp",
         "vector": "cpp",
-        "system_error": "cpp"
+        "system_error": "cpp",
+        "iterator": "cpp",
+        "scoped_allocator": "cpp",
+        "regex": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

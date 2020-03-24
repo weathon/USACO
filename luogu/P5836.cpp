@@ -27,7 +27,7 @@ vector<int> bstring;
 
 int main()
 {
-    // freopen("P5836.in", "r", stdin);//原来是这个
+    freopen("P5836.in", "r", stdin);//原来是这个
     cin >> N >> M;
     for (int i = 1; i <= N; i++) //还是弄错
     {
@@ -42,17 +42,19 @@ int main()
     {
         cin >> A[i] >> B[i] >> which_kind_of_cows_i_like[i];
     }
+    int pointer = A[0];
+
+    while (pointer != 0) //0相当于NULL
+    {
+        pointer = mytree[pointer];
+        myroot = pointer;
+    }
     for (int i = 0; i < M; i++)
     {
         astring.clear();
         bstring.clear();
-        int pointer = A[i];
-        while (pointer != 0) //0相当于NULL
-        {
-            pointer = mytree[pointer];
-            myroot = pointer;
-        }
-        // cout<<myroot<<endl; 第一次root为1,第二次为0,所以TLE?
+
+        // cout<<myroot<<endl; 第一次root为1,第二次为0,看错输出而已，这个不用每次都做所以TLE?
         pointer = A[i];
         while (pointer != myroot)
         {
@@ -82,12 +84,13 @@ int main()
         if (the_number_where_it_got_different == -1)
         //完全相等
         {
-            if(which_kind_of_cows_farm_i_has[A[i]]== which_kind_of_cows_i_like[i])
+            if (which_kind_of_cows_farm_i_has[A[i]] == which_kind_of_cows_i_like[i])
             {
-                cout<<"1";
+                cout << "1";
             }
-            else{
-                cout<<"0";
+            else
+            {
+                cout << "0";
             }
             continue;
         }
@@ -114,6 +117,11 @@ int main()
         for (auto ii : bstring)
         {
             if (ii == the_number_where_it_got_different)
+            /*
+            (gdb) p ii
+$12 = 3
+(gdb) p the_number_where_it_got_different 
+$13 = 2*/
                 mystart = true;
             if (mystart)
             {
