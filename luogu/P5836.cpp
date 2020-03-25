@@ -1,15 +1,4 @@
-#include <iostream>
-#include <cstring>
-#include <string>
-#include <cstdio>
-#include <math.h>
-#include <queue>
-#include <vector>
-#include <stack>
-#include <algorithm>
-#include <unordered_map>
-#include <unordered_set>
-#include <fstream>
+#include <bits/stdc++.h>
 using namespace std;
 
 int N, M;
@@ -27,7 +16,7 @@ vector<int> bstring;
 
 int main()
 {
-    freopen("P5836.in", "r", stdin);//原来是这个
+    // freopen("P5836.in", "r", stdin); //原来是这个
     cin >> N >> M;
     for (int i = 1; i <= N; i++) //还是弄错
     {
@@ -51,6 +40,20 @@ int main()
     }
     for (int i = 0; i < M; i++)
     {
+        if (A[i] == B[i])
+        //不一定是完全相等，有可能是 0，1，2和0，1，2，3，4 眼睛辣
+        {
+            if (which_kind_of_cows_farm_i_has[A[i]] == which_kind_of_cows_i_like[i])
+            {
+                cout << "1";
+            }
+            else
+            {
+                cout << "0";
+            }
+            continue;
+        }
+
         astring.clear();
         bstring.clear();
 
@@ -73,34 +76,56 @@ int main()
         reverse(bstring.begin(), bstring.end());
         the_number_where_it_got_different = -1;
 
-        for (int ii = 0; ii <= min(astring.size(), bstring.size()); ii++)
+        for (int ii = 0; ii < min(astring.size(), bstring.size()); ii++) //<= or <
         {
             if (astring[ii] != bstring[ii])
             {
-                the_number_where_it_got_different = astring[ii - 1];
+                // the_number_where_it_got_different = astring[ii - 1];
+                the_number_where_it_got_different = ii - 1; //还是分不清index和value
             }
         }
-
         if (the_number_where_it_got_different == -1)
-        //完全相等
         {
-            if (which_kind_of_cows_farm_i_has[A[i]] == which_kind_of_cows_i_like[i])
+            bool ians = 0;
+
+            //0,1,2,3 and 0,1,2,3,4,5
+            if (astring.size() > bstring.size()) //代码自己都看不懂了，查找整个路径是不是同色即可
             {
-                cout << "1";
+                for (int _ = the_number_where_it_got_different; _ < astring.size(); _++)
+                {
+                    if (which_kind_of_cows_i_like[i] == which_kind_of_cows_farm_i_has[astring[_]])
+                        ; //index
+                    {
+                        // cout << 1;
+                        ians = 1;
+                        break;
+                    }
+                }
+                cout << ians;
+                continue;
             }
             else
             {
-                cout << "0";
+                for (int _ = the_number_where_it_got_different; _ < astring.size(); _++)
+                {
+                    if (which_kind_of_cows_i_like[i] == which_kind_of_cows_farm_i_has[bstring[_]])
+                    {
+                        ians = 1;
+                        break;
+                    }
+                }
+                cout << ians;
+                continue;
             }
-            continue;
         }
         // cout<<"error";
         // return -1;//去掉这个反而AC了一个点
         bool mystart = false;
         int ans = 0;
+        int myindex = 0;
         for (auto ii : astring)
         {
-            if (ii == the_number_where_it_got_different)
+            if (myindex == the_number_where_it_got_different)
                 mystart = true;
             if (mystart)
             {
@@ -112,16 +137,19 @@ int main()
                 }
                 // continue;
             }
+            myindex++;
         }
         mystart = false;
-        for (auto ii : bstring)
+        myindex = 0;
+        for (auto ii : bstring) //被ii混了？
         {
-            if (ii == the_number_where_it_got_different)
-            /*
-            (gdb) p ii
-$12 = 3
-(gdb) p the_number_where_it_got_different 
-$13 = 2*/
+            if (myindex == the_number_where_it_got_different) //index and value
+                /*
+                (gdb) p ii
+                $12 = 3
+                (gdb) p the_number_where_it_got_different 
+                $13 = 2
+                */
                 mystart = true;
             if (mystart)
             {
@@ -132,6 +160,7 @@ $13 = 2*/
                 }
                 // continue;
             }
+            myindex++;
         }
         cout << ans;
     }
