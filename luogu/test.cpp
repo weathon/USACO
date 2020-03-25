@@ -1,5 +1,6 @@
 #include<iostream>
 using namespace std;
+int b[100000000]={1};
 
 int main()
 {
