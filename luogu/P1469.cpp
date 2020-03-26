@@ -13,24 +13,16 @@ int main()
     cin >> N;
     for (int i = 0; i < N; i++)
     {
-        // for (auto ii : chopsticks)
-        // cout << ii << endl;
-
-        // cout << endl;
-        cin >> tmp;
-        // cout<<chopsticks.count(tmp)<<endl;//进不来
-        if (chopsticks.count(tmp) == 1)
+        scanf("%d",&tmp);
+        if (chopsticks.count(tmp))
         {
             chopsticks.erase(tmp);
-            // chopsticks.erase(tmp);
-            // cout<<chopsticks.count(tmp)<<endl;//进不来
         }
         else
         {
             chopsticks.insert(tmp);
         }
     }
-    for (auto i : chopsticks)
-        cout << i << endl;
+    cout << *chopsticks.begin() << endl;
     return 0;
 }
