@@ -9,6 +9,7 @@ using namespace std;
 
 int N;
 int myloop[MYMAX];
+int myloopo[MYMAX];
 int repeat[MYMAX];
 
 long long ans, totalans=OO;
@@ -29,7 +30,7 @@ int main()
     cin >> N;
     for (int i = 0; i < N; i++)
     {
-        cin >> myloop[i];
+        cin >> myloopo[i];
     }
     //不需要遍历起点,最多的点(s)
     int maxcows = 0;
@@ -37,12 +38,13 @@ int main()
     for (int i = 0; i < N; i++)
     {
         if (myloop[i] > maxcows)
-            maxcows = myloop[i];
+            maxcows = myloopo[i];
     }
+    // 后面都是0的原因：没有还原myloop
 
     for (int i = 0; i < N; i++)
     {
-        if (myloop[i] == maxcows) //游泳池消毒水味，晚上
+        if (myloopo[i] == maxcows) //游泳池消毒水味，晚上
         {
             maxcowsindex.push_back(i);
         }
@@ -53,6 +55,7 @@ int main()
     {
         // cows.
         queue<int> cows;
+        for(int i=0;i<N;i++) myloop[i]=myloopo[i];
         for (int i = 0; i < N; i++)
             repeat[i] = -1;
         ans = 0;
@@ -72,18 +75,14 @@ int main()
                 ans += loopdis(cows.front(), i) * loopdis(cows.front(), i);
                 cows.pop();
             }
-
-            // for (int _ = 0; _ < N; _++)
-            //     cout << myloop[_] << " ";
-            // cout << endl;
         }
         int last0index = 0;
-        for (int i = 0; i < N; i++)
+        for (int i = start; i < N+start; i++)
         {
-            if (myloop[i] == 0)
-                last0index = i;
+            if (myloop[i%N] == 0)
+                last0index = i%N;
         }
-        for (int ii = start; ii < N+start; ii++)//下面这行忘了改
+        for (int ii = start; ii < start+last0index; ii++)//后面还是很多时重复的1但是还在弄
         {
             int i=ii%N;
             if (myloop[i] >= 1)
@@ -105,17 +104,17 @@ int main()
                 cows.pop();
             }
 
-            // for (int _ = 0; _ < N; _++)
-            //     cout << myloop[_] << " ";
-            // cout << endl;
+            for (int _ = 0; _ < N; _++)
+                cout << myloop[_] << " ";
+            cout << endl;
 
         } //自己差一点就想到了,还有这个为什么31不行,手工的时候也有好多次小于33
         if (ans < totalans)//反了,totalans太大
             totalans = ans;
 
         cout<<ans<<" "<<start<<endl;
+    // cout << last0index << endl;//输出这个瞬间ok？
     }
-    // cout << last0index << endl;
     cout << totalans << endl;
     return 0;
 }
