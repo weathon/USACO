@@ -17,7 +17,7 @@ long long ans;
 inline int loopdis(int a, int b)
 {
     //from a to b
-    if (b > a)
+    if (b >= a) //yao =
         return b - a;
     else
     {
@@ -34,39 +34,52 @@ int main()
     {
         cin >> myloop[i];
     }
-    int myindex = 0;
+    // int myindex = 0;
     //全部push一圈再pop一圈？
     int tmp2;
+    bool waszero;
     for (int i = 0; i < N; i++)
     {
-        // if (myloop[i] > 1) //Maybe whatever how many cows, just move, because give space to others,优先队列？
-        // https://www.luogu.com.cn/problemnew/solution/P3137
+        // waszero=false;
+        if (myloop[i] == 0 and !mycows.empty())
         {
-            for (int _ = 0; _ < myloop[i]; _++)
-            {
-                tmp.pos = i;
-                tmp.energy = 0;
-                mycows.push(tmp);
-            }
-        }
-        tmp2 = loopdis(mycows.top().pos, i);
-        ans += tmp2 * tmp2;
-        mycows.pop();
-    }
-    myloop[i] = 0;
-}
+            tmp2 = loopdis(mycows.top().pos, i);
+            ans += tmp2 * tmp2;
+            mycows.pop();
+            myloop[i]++; //missing
+            // waszero=true;
+        } //shunxu
 
-// int tmp2;
-// for (int i = 0; i < N; i++)
-// {
-//     if (myloop[i] == 0)//这里的0，上面忘了归零
-//     {
-//         tmp2 = loopdis(mycows.top().pos, i);
-//         ans += tmp2 * tmp2;
-//         mycows.pop();
-//     }
-// }
-// for (int i = 0; i N; i++)
-cout << ans << endl;
-return 0;
+        // if(!waszero)
+        for (int _ = 0; _ < myloop[i]; _++)
+        {
+            tmp.pos = i;
+            tmp.energy = 0;
+            mycows.push(tmp);
+            myloop[i]--;
+        }
+        if (myloop[i] == 0 and !mycows.empty())
+        {
+            tmp2 = loopdis(mycows.top().pos, i);
+            ans += tmp2 * tmp2;
+            mycows.pop();
+            myloop[i]++; //missing
+            // waszero=true;
+        } //shunxu
+    }
+
+    for (int i = 0; i < N; i++)
+    {
+        if (myloop[i] == 0 and !mycows.empty())
+        {
+            tmp2 = loopdis(mycows.top().pos, i);
+            ans += tmp2 * tmp2;
+            mycows.pop();
+            myloop[i]++;
+        }
+    }
+    cout << ans << endl;
+    // cout << mycows.size() << endl;
+    // for(int i=0;i<N;i++) cout<<myloop[i]<<" ";
+    return 0;
 }
