@@ -37,11 +37,11 @@ int main()
     vector<int> maxcowsindex;
     for (int i = 0; i < N; i++)
     {
-        if (myloop[i] > maxcows)
+        if (myloopo[i] > maxcows)//忘了o
             maxcows = myloopo[i];
     }
     // 后面都是0的原因：没有还原myloop
-
+    // cout<<"--------"<<maxcows<<endl;  输出0，怪不得结果错，调试那么久还是不确定，太多错误了
     for (int i = 0; i < N; i++)
     {
         if (myloopo[i] == maxcows) //游泳池消毒水味，晚上
@@ -80,9 +80,9 @@ int main()
         for (int i = start; i < N+start; i++)
         {
             if (myloop[i%N] == 0)
-                last0index = i%N;
+                last0index = i;//这里摸Jiuhaol
         }
-        for (int ii = start; ii < start+last0index; ii++)//后面还是很多时重复的1但是还在弄
+        for (int ii = start; ii <=last0index; ii++)//后面还是很多时重复的1但是还在弄
         {
             int i=ii%N;
             if (myloop[i] >= 1)
@@ -112,9 +112,9 @@ int main()
         if (ans < totalans)//反了,totalans太大
             totalans = ans;
 
-        cout<<ans<<" "<<start<<endl;
+        cout<<ans<<" "<<start+last0index<<endl;//很明显有一个0没有消除
     // cout << last0index << endl;//输出这个瞬间ok？
     }
-    cout << totalans << endl;
+    cout << totalans<< endl;
     return 0;
 }
