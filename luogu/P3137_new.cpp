@@ -30,7 +30,7 @@ int main()
     }
     //不需要遍历起点,最多的点
     queue<int> cows;
-    for (int ii = 7; ii < N + 7; ii++)
+    for (int ii = 0; ii < N; ii++)
     {
         int i = ii % N;
         if (myloop[i] >= 1)
@@ -46,19 +46,13 @@ int main()
             cows.pop();
         }
     }
-    // int unfinished_count=0;
-    // unordered_set <int> unfinished;
-    // for (int i = 0; i < N; i++)
-    // {
-    //     if(myloop[i]==0)
-    //     {
-    //         unfinished.insert(i);
-    //         unfinished_count++;
-    //     }
-    // }
-    // bool wasunfinshed;
-    
+    int last0index = 0;
     for (int i = 0; i < N; i++)
+    {
+        if (myloop[i] == 0)
+            last0index = i;
+    }
+    for (int i = 0; i <= last0index; i++)
     {
         if (myloop[i] >= 1)
         {
@@ -73,6 +67,10 @@ int main()
             cows.pop();
         }
     }
+    for (int i = 0; i < N; i++)
+        cout << myloop[i] << " ";
+    cout << endl;
+    cout << last0index << endl;
     cout << ans << endl;
     return 0;
 }
