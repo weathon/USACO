@@ -18,7 +18,9 @@
         "system_error": "cpp",
         "iterator": "cpp",
         "scoped_allocator": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "algorithm": "cpp",
+        "set": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

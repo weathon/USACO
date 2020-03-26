@@ -12,7 +12,7 @@ int myloop[MYMAX];
 int myloopo[MYMAX];
 int repeat[MYMAX];
 
-long long ans, totalans=OO;
+long long ans, totalans = OO;
 
 inline int loopdis(int a, int b)
 {
@@ -37,7 +37,7 @@ int main()
     vector<int> maxcowsindex;
     for (int i = 0; i < N; i++)
     {
-        if (myloopo[i] > maxcows)//忘了o
+        if (myloopo[i] > maxcows) //忘了o
             maxcows = myloopo[i];
     }
     // 后面都是0的原因：没有还原myloop
@@ -52,10 +52,12 @@ int main()
     //启动虚拟环境
 
     for (int start : maxcowsindex)
+    // for(int start=0;start<N;start++)//改成全部就可以过了，官方题解说的最大的呢
     {
         // cows.
         queue<int> cows;
-        for(int i=0;i<N;i++) myloop[i]=myloopo[i];
+        for (int i = 0; i < N; i++)
+            myloop[i] = myloopo[i];
         for (int i = 0; i < N; i++)
             repeat[i] = -1;
         ans = 0;
@@ -77,14 +79,14 @@ int main()
             }
         }
         int last0index = 0;
-        for (int i = start; i < N+start; i++)
+        for (int i = start; i < N + start; i++)
         {
-            if (myloop[i%N] == 0)
-                last0index = i;//这里摸Jiuhaol
+            if (myloop[i % N] == 0)
+                last0index = i; //这里摸Jiuhaol
         }
-        for (int ii = start; ii <=last0index; ii++)//后面还是很多时重复的1但是还在弄
+        for (int ii = start; ii <= last0index; ii++) //后面还是很多时重复的1但是还在弄
         {
-            int i=ii%N;
+            int i = ii % N;
             if (myloop[i] >= 1)
             {
                 for (int _ = 0; _ < myloop[i]; _++)
@@ -104,17 +106,17 @@ int main()
                 cows.pop();
             }
 
-            for (int _ = 0; _ < N; _++)
-                cout << myloop[_] << " ";
-            cout << endl;
+            // for (int _ = 0; _ < N; _++)
+            //     cout << myloop[_] << " ";
+            // cout << endl;
 
-        } //自己差一点就想到了,还有这个为什么31不行,手工的时候也有好多次小于33
-        if (ans < totalans)//反了,totalans太大
+        }                   //自己差一点就想到了,还有这个为什么31不行,手工的时候也有好多次小于33
+        if (ans < totalans) //反了,totalans太大
             totalans = ans;
 
         cout<<ans<<" "<<start+last0index<<endl;//很明显有一个0没有消除
-    // cout << last0index << endl;//输出这个瞬间ok？
+        // cout << last0index << endl;//输出这个瞬间ok？
     }
-    cout << totalans<< endl;
+    cout << totalans << endl;
     return 0;
 }
