@@ -22,7 +22,7 @@ long long tmp;
 
 int main()
 {
-    freopen("1102.in","r",stdin);
+    // freopen("1102.in","r",stdin);
     cin >> N >> C;
     // cout<<mymap[555];
     for (int i = 0;i < N; i++)

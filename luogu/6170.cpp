@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <stack>
 #include <unordered_set>
+#include <unordered_map>
 using namespace std;
 #define MYMAX 100005
 #define OO 1000000000000000000
@@ -51,10 +52,11 @@ int main()
     }
     //启动虚拟环境
 
-    // for (int start : maxcowsindex)
-    for(int start=0;start<N;start++)//改成全部就可以过了，官方题解说的最大的呢
+    for (int starts : maxcowsindex)
     {
-        //求前缀和>=0证明此处有多余的牛
+        // cows.
+        int start=starts-1;
+        if(start==-1) start=N-1;
         queue<int> cows;
         for (int i = 0; i < N; i++)
             myloop[i] = myloopo[i];
@@ -114,7 +116,7 @@ int main()
         if (ans < totalans) //反了,totalans太大
             totalans = ans;
 
-        cout<<ans<<" "<<start<<endl;//很明显有一个0没有消除
+        // cout<<ans<<" "<<start+last0index<<endl;//很明显有一个0没有消除
         // cout << last0index << endl;//输出这个瞬间ok？
     }
     cout << totalans << endl;
