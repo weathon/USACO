@@ -10,21 +10,25 @@ int maxd;
 
 char check(int myd) //return '>' '=' and '<'
 {
-    int nowpos = 0;
-    int cowleft = N;
+    int nowpos = a[0]; //不一定从0开始
+    int cowleft = N - 1;
     for (int k = 0; k < M; k++) //mising k=0
     {
         if (cowleft < 0)
             break;
         while (nowpos <= b[k])
         {
-            if (nowpos < a[k])
+            if (nowpos + myd < a[k])
             {
-                nowpos = max(a[k], nowpos + myd);
+                nowpos = a[k];
             }
             else
             {
-                nowpos += myd;
+                if (nowpos + myd <= b[k])
+                    nowpos += myd;
+                else //missing
+                    // continue; break?
+                    break;
             }
             if (nowpos >= a[k] and nowpos <= b[k])
                 cowleft--;
@@ -49,8 +53,10 @@ int main(void)
     {
         cin >> a[_] >> b[_];
     }
+    // --36266
     sort(a, a + M);
     sort(b, b + M); //less first
+    // cout<<"--"<<a[0]<<endl;
     maxd = b[M - 1] / N;
     int l = 0;
     int r = maxd + 2;
@@ -78,9 +84,12 @@ int main(void)
     // }
     for (int a = 1; a <= r; a++)
     {
-        // cout<<a<<endl;
-        if (check(a) == '>')
+        // cout<<check(a)<<endl;
+        if (check(a) == '=')
+        {
             cout << a - 1 << endl;
+            break;
+        }
     }
     return 0;
 }
