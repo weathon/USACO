@@ -32,15 +32,12 @@ char check(int myd) //return '>' '=' and '<'
     }
     if (b[M - 1] - nowpos >= myd)
     {
-        return '<'
+        return '<';
     }
     if (b[M - 1] - nowpos < 0)
         return '>';
-    // if (b[M - 1] - nowpos < myd)
-    // {
     else
-        return '='
-    // }
+        return '=';
 }
 
 int main(void)
@@ -59,25 +56,31 @@ int main(void)
     int r = maxd + 2;
     int mid = (r + l) / 2;
     // cout << maxd; //get 1?
-    while (1)
+    // while (1)
+    // {
+    //     mid = (r + l) / 2; //missing
+    //     cout << mid << endl;
+    //     char tmp_ans = check(mid);
+    //     cout << tmp_ans << endl;
+    //     if (tmp_ans == '=')
+    //     {
+    //         cout << mid << endl; //得到了2还是死循环，2还是小于
+    //         exit(0);
+    //     }
+    //     else if (tmp_ans == '<') //反了
+    //     {
+    //         l = mid;
+    //     }
+    //     else
+    //     {
+    //         r = mid;
+    //     }
+    // }
+    for (int a = 1; a <= r; a++)
     {
-        mid = (r + l) / 2; //missing
-        cout << mid << endl;
-        char tmp_ans = check(mid);
-        cout << tmp_ans << endl;
-        if (tmp_ans == '=')
-        {
-            cout << mid << endl; //得到了2还是死循环，2还是小于
-            exit(0);
-        }
-        else if (tmp_ans == '<') //反了
-        {
-            l = mid;
-        }
-        else
-        {
-            r = mid;
-        }
+        // cout<<a<<endl;
+        if (check(a) == '>')
+            cout << a - 1 << endl;
     }
     return 0;
 }
