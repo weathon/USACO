@@ -14,8 +14,6 @@ char check(int myd) //return '>' '=' and '<'
     int cowleft = N - 1;
     for (int k = 0; k < M; k++) //mising k=0
     {
-        if (cowleft < 0)
-            break;
         while (nowpos <= b[k])
         {
             if (nowpos + myd < a[k])
@@ -34,11 +32,11 @@ char check(int myd) //return '>' '=' and '<'
                 cowleft--;
         }
     }
-    if (b[M - 1] - nowpos >= myd)
+    if (cowleft < 0)
     {
         return '<';
     }
-    if (b[M - 1] - nowpos < 0)
+    if (cowleft > 0)
         return '>';
     else
         return '=';
@@ -62,34 +60,40 @@ int main(void)
     int r = maxd + 2;
     int mid = (r + l) / 2;
     // cout << maxd; //get 1?
-    // while (1)
-    // {
-    //     mid = (r + l) / 2; //missing
-    //     cout << mid << endl;
-    //     char tmp_ans = check(mid);
-    //     cout << tmp_ans << endl;
-    //     if (tmp_ans == '=')
-    //     {
-    //         cout << mid << endl; //得到了2还是死循环，2还是小于
-    //         exit(0);
-    //     }
-    //     else if (tmp_ans == '<') //反了
-    //     {
-    //         l = mid;
-    //     }
-    //     else
-    //     {
-    //         r = mid;
-    //     }
-    // }
-    for (int a = 1; a <= r; a++)
+    while (1)
     {
-        // cout<<check(a)<<endl;
-        if (check(a) == '=')
+        mid = (r + l) / 2; //missing
+        // cout << mid << endl;
+        char tmp_ans = check(mid);
+        // cout << tmp_ans << endl;
+        if (tmp_ans == '=')
         {
-            cout << a - 1 << endl;
-            break;
+            cout << mid << endl; //得到了2还是死循环，2还是小于
+            exit(0);
+        }
+        else if (tmp_ans == '<') //反了
+        {
+            l = mid;
+        }
+        else
+        {
+            if (check(mid - 1) != '>')
+            {
+                cout << mid - 1 << endl;
+                exit(0);
+            }
+            r=mid;
         }
     }
+    // for (int a = 1; a <= r; a++)
+    // {
+    //     // cout<<a<<endl;
+    //     // cout<<check(a)<<endl;
+    //     if (check(a) == '>')
+    //     {
+    //         cout << a -1 << endl;
+    //         break;
+    //     }
+    // }
     return 0;
 }
