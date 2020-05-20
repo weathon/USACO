@@ -14,30 +14,39 @@ char check(int myd) //return '>' '=' and '<'
     int cowleft = N;
     for (int k = 0; k < M; k++) //mising k=0
     {
+        if (cowleft < 0)
+            break;
         while (nowpos <= b[k])
         {
-            nowpos += myd;
-            cowleft--;
+            if (nowpos < a[k])
+            {
+                nowpos = max(a[k], nowpos + myd);
+            }
+            else
+            {
+                nowpos += myd;
+            }
+            if (nowpos >= a[k] and nowpos <= b[k])
+                cowleft--;
         }
     }
-    if (cowleft < 0)
+    if (b[M - 1] - nowpos >= myd)
     {
-        return '<';
+        return '<'
     }
-    else if (cowleft == 0)
-    {
-        return '=';
-    }
-    else
-    {
+    if (b[M - 1] - nowpos < 0)
         return '>';
-    }
+    // if (b[M - 1] - nowpos < myd)
+    // {
+    else
+        return '='
+    // }
 }
 
 int main(void)
 {
     freopen("socdist.in", "r", stdin);
-    // freopen("socdist.out","w",stdout);
+    // freopen("socdist.out", "w", stdout);
     cin >> N >> M;
     for (int _ = 0; _ < M; _++)
     {
@@ -53,9 +62,9 @@ int main(void)
     while (1)
     {
         mid = (r + l) / 2; //missing
-        cout<<mid<<endl;
+        cout << mid << endl;
         char tmp_ans = check(mid);
-        cout << tmp_ans;
+        cout << tmp_ans << endl;
         if (tmp_ans == '=')
         {
             cout << mid << endl; //得到了2还是死循环，2还是小于
