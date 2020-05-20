@@ -11,30 +11,26 @@ int maxd;
 char check(int myd) //return '>' '=' and '<'
 {
     int nowpos = 0;
+    int cowleft = N;
     for (int k = 0; k < M; k++) //mising k=0
     {
-        //还有一个while，一个区间可能有多个
-        if (nowpos + myd <= b[k])
+        while (nowpos <= b[k])
         {
             nowpos += myd;
-        }
-        else
-        {
-            if (k != M - 1)
-            {
-                // nowpos = a[1 + k];//不能直接放，还要检测这一个点可不可以，Ethan Liu
-            }
-            else
-                return '>'; //忘了else
+            cowleft--;
         }
     }
-    if (nowpos + myd > b[M - 1])
+    if (cowleft < 0)
+    {
+        return '<';
+    }
+    else if (cowleft == 0)
     {
         return '=';
     }
     else
     {
-        return '<';
+        return '>';
     }
 }
 
@@ -53,11 +49,11 @@ int main(void)
     int l = 0;
     int r = maxd + 2;
     int mid = (r + l) / 2;
-    cout << maxd;
+    // cout << maxd; //get 1?
     while (1)
     {
         mid = (r + l) / 2; //missing
-        // cout<<mid<<endl;
+        cout<<mid<<endl;
         char tmp_ans = check(mid);
         cout << tmp_ans;
         if (tmp_ans == '=')
