@@ -2,21 +2,21 @@
 #include <fstream>
 #include <bits/stdc++.h>
 using namespace std;
-int N, M;
-int a[100005];
-int b[100005];
-int ans;
-int maxd;
+long long N, M;
+long long a[100005];
+long long b[100005];
+long long ans;
+long long maxd;
 
-char check(int myd) //return '>' '=' and '<'
+char check(long long myd) //return '>' '=' and '<'
 {
-    int nowpos = a[0]; //不一定从0开始
-    int cowleft = N - 1;
-    for (int k = 0; k < M; k++) //mising k=0
+    long long nowpos = a[0]; //不一定从0开始
+    long long cowleft = N - 1;
+    for (long long k = 0; k < M; k++) //mising k=0
     {
         while (nowpos <= b[k])
         {
-            if (nowpos + myd < a[k])
+            if (nowpos + myd <= a[k])
             {
                 nowpos = a[k];
             }
@@ -44,10 +44,10 @@ char check(int myd) //return '>' '=' and '<'
 
 int main(void)
 {
-    freopen("socdist.in", "r", stdin);
+    // freopen("7.in", "r", stdin);
     // freopen("socdist.out", "w", stdout);
     cin >> N >> M;
-    for (int _ = 0; _ < M; _++)
+    for (long long _ = 0; _ < M; _++)
     {
         cin >> a[_] >> b[_];
     }
@@ -56,9 +56,9 @@ int main(void)
     sort(b, b + M); //less first
     // cout<<"--"<<a[0]<<endl;
     maxd = b[M - 1] / N;
-    int l = 0;
-    int r = maxd + 2;
-    int mid = (r + l) / 2;
+    long long l = 0;
+    long long r = 34359738368;
+    long long mid = (r + l) / 2;
     // cout << maxd; //get 1?
     while (1)
     {
@@ -69,9 +69,10 @@ int main(void)
         if (tmp_ans == '=')
         {
             cout << mid << endl; //得到了2还是死循环，2还是小于
-            exit(0);
+            exit(0); //忘了取消这个？
         }
-        else if (tmp_ans == '<') //反了
+        // 不要？当小于？
+        if (tmp_ans == '<' or tmp_ans=='=') //反了
         {
             l = mid;
         }
@@ -79,13 +80,14 @@ int main(void)
         {
             if (check(mid - 1) != '>')
             {
+                // cout<<"aa";
                 cout << mid - 1 << endl;
                 exit(0);
             }
             r=mid;
         }
     }
-    // for (int a = 1; a <= r; a++)
+    // for (long long a = 1; a <= r; a++)
     // {
     //     // cout<<a<<endl;
     //     // cout<<check(a)<<endl;
