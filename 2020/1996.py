@@ -19,7 +19,7 @@ while(n>1):
        mcount=0;
        #index-=1;
        #if(index==0): index=n-1;#was index=1, seems nochanged
-       print(array[index]);
+       print(array[index],end=" ");
        del array[index];
        index-=1
        n-=1;
