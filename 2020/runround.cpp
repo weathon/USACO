@@ -19,7 +19,7 @@ bool check(int);
 int main(void)
 {
     freopen("runround.in", "r", stdin);
-    // freopen("runround.out","w",stdout);
+    freopen("runround.out","w",stdout);
     cin >> m;
     cn = m;
     while (1)
@@ -78,7 +78,7 @@ bool check(int a)
         current_index-=num[current_index];
         while(current_index<0)
         {
-            current_index+=num.size();//到底是什么，不加不减？？？？ 第一次+第二次-  崔吃饭
+            current_index+=num.size();//到底是什么，不加不减？？？？ 第一次+第二次-  崔吃饭 nongcuole er yi, shu cuo le meishu zi ji?  shide yi yang hua guo qu le mei shu zui hou yi ge 
         }
     }
 }
