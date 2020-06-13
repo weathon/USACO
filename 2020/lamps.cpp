@@ -25,7 +25,7 @@ void dfs(int, int, lamps);
 int N;
 int C;
 
-bool cmp(lamps L1, lamps L2)
+int cmp(lamps L1, lamps L2)
 {
     for (int i = 0; i < N; i++)
     {
@@ -38,8 +38,9 @@ bool cmp(lamps L1, lamps L2)
             return false;
         }
     }
+    return -1;
 }
-
+//only AC 3, through USACO data, some of them are the same
 int main(void)
 {
     // freopen("lamps.in", "r", stdin);
@@ -79,14 +80,26 @@ int main(void)
         cout << "IMPOSSIBLE" << endl;
         return 0;
     }
-    sort(ans.begin(),ans.end(),cmp);
-    for(auto ___:ans)
+    sort(ans.begin(), ans.end(), cmp);
+    lamps last;
+    last = ans[0];
+    for (int pp = 0; pp < N; pp++)
     {
-        for(int pp=0;pp<N;pp++)
+        printf("%d", ans[0].status[pp]);
+    }
+    cout<<endl;
+    for (auto ___ : ans)
+    {
+        if (cmp(last, ___) == -1)
         {
-            printf("%d",___.status[pp]);
+            continue;
         }
-        cout<<endl;
+        last = ___;
+        for (int pp = 0; pp < N; pp++)
+        {
+            printf("%d", ___.status[pp]);
+        }
+        cout << endl;
     }
     return 0;
 }
