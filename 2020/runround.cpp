@@ -18,8 +18,8 @@ bool check(int);
 
 int main(void)
 {
-    freopen("runround.in", "r", stdin);
-    freopen("runround.out","w",stdout);
+    // freopen("runround.in", "r", stdin);
+    // freopen("runround.out","w",stdout);
     cin >> m;
     cn = m;
     while (1)
@@ -60,6 +60,7 @@ bool check(int a)
     int wentcount=0;
     // int current_dig=num[num.size()-1];
     int current_index=num.size()-1;
+    // cout<<num.size()<<endl;
     while(1)
     {
         if(appeared.count(num[current_index]))
@@ -67,7 +68,10 @@ bool check(int a)
             // 来到了一个来过的点
             if(wentcount==num.size())//**** 全部来过了
             {
-                return true;//其实只要否则false就好了，避免死循环，还有下面的操作
+                cout<<current_index<<endl;
+                if(current_index==num.size()-1) return true;//其实只要否则false就好了，避免死循环，还有下面的操作  忘记了反过来
+                // 要停留于开始？
+                return false;
             }
             else{
                 return false;
