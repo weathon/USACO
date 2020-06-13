@@ -78,7 +78,7 @@ bool check(int a)
         current_index-=num[current_index];
         while(current_index<0)
         {
-            current_index+=num.size()+1;
+            current_index+=num.size();//到底是什么，不加不减？？？？ 第一次+第二次-  崔吃饭
         }
     }
 }
