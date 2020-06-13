@@ -21,7 +21,7 @@ int main(void)
     // freopen("runround.in", "r", stdin);
     // freopen("runround.out","w",stdout);
     cin >> m;
-    // m++;
+    m++;
     cn = m;
     while (1)
     {
@@ -35,14 +35,11 @@ int main(void)
     return 0;
 }
 
-vector<short> num;
-set<short> appeared;
 bool check(int a)
 {
-    // if(a==134259) return false;
-    num.clear();
-    appeared.clear();
     //get each dig
+    vector<short> num;
+    set<short> appeared;
     while (1)
     {
         if (a == 0)
@@ -61,39 +58,30 @@ bool check(int a)
     }
     appeared.clear();
     // reuse
-    int wentcount = 0;
+    int wentcount=0;
     // int current_dig=num[num.size()-1];
-    int current_index = num.size() - 1;
-    // cout<<num.size()<<endl;
-    int lastindex;
-    while (1)
+    int current_index=num.size()-1;
+    while(1)
     {
-        if (appeared.count(num[current_index])) //总是忘记，不是全部走过而是会开头
+        if(appeared.count(num[current_index]))
         {
             // 来到了一个来过的点
-            if (wentcount == num.size()) //**** 全部来过了
+            if(wentcount==num.size())//**** 全部来过了
             {
-                // cout<<current_index<<endl;  qi ta dou dui jiu shi zhe ge index
-                // mi fan kun
-                // cout<<lastindex<<" "<<num.size()<<endl;
-                //又是绕一圈回来的
-                if (current_index == num.size() - 1)
-                    return true; //其实只要否则false就好了，避免死循环，还有下面的操作  忘记了反过来
+                if(current_index==num.size()-1) return true;//其实只要否则false就好了，避免死循环，还有下面的操作  忘记了反过来
                 // 要停留于开始？
                 return false;
             }
-            else
-            {
+            else{
                 return false;
             }
         }
         appeared.insert(num[current_index]);
         wentcount++;
-        lastindex = current_index;
-        current_index -= num[current_index];
-        while (current_index < 0)
+        current_index-=num[current_index];
+        while(current_index<0)
         {
-            current_index += num.size(); //到底是什么，不加不减？？？？ 第一次+第二次-  崔吃饭 nongcuole er yi, shu cuo le meishu zi ji?  shide yi yang hua guo qu le mei shu zui hou yi ge
+            current_index+=num.size();//到底是什么，不加不减？？？？ 第一次+第二次-  崔吃饭 nongcuole er yi, shu cuo le meishu zi ji?  shide yi yang hua guo qu le mei shu zui hou yi ge 
         }
     }
 }
