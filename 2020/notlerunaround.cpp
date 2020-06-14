@@ -34,17 +34,13 @@ int main(void)
     }
     return 0;
 }
-
-// vector<short> num;
-// set<short> appeared;
+vector<short> num;
+set<short> appeared;
 bool check(int a)
 {
-    // if(a==134259) return false;
-    // num.clear();
-    // appeared.clear();
     //get each dig
-    vector<short> num;
-    set<short> appeared;
+    num.clear();
+    appeared.clear();
     while (1)
     {
         if (a == 0)
@@ -99,3 +95,4 @@ bool check(int a)
         }
     }
 }
+//第二次提交还是TLE
