@@ -11,7 +11,6 @@ int N, K;
 int B[1008];
 int BB[1008];
 
-
 bool cmp(int a, int b)
 {
     return a > b;
@@ -29,7 +28,7 @@ int find_max()
 
 int main()
 {
-    freopen("berries.in", "r", stdin);
+    freopen("berries2.in", "r", stdin);
     // freopen("berries.out","w",stdout);
     cin >> N >> K;
     FOR(0, N)
@@ -42,6 +41,8 @@ int main()
     // FOR (int i=mymax-1;i>=0;i--)
     // cout<<mymax<<endl; 8
     FOR(1, mymax) //zheli gai cheng 1 jiu hao le?
+    // 
+    // int i=4;
     {
         // cout<<i<<endl;
         //便利数字
@@ -50,17 +51,18 @@ int main()
         int thiiiimax = i;
         int tmpsum = 0;
         int count = K;
-        for(int i=0;i<N;i++)
+        for (int i = 0; i < N; i++)
         {
-            BB[i]=B[i];
+            BB[i] = B[i];
         }
         // while (tong>=1)
         while (count >= 1) //bu neng yong K?
         {
-            if (i < BB[tree])
+            printf("%d %d %d %d\n",count,tong,tree,BB[tree]);
+            if (i <= BB[tree])//wang le <=
             {
-                BB[tree] -= i;//huan yuan!!!!
-                tong++; //++ --
+                BB[tree] -= i; //huan yuan!!!!
+                tong++;        //++ --
                 // yao fang li mian
             }
             else
@@ -69,8 +71,9 @@ int main()
                 if (i < BB[tree])
                 {
                     BB[tree] -= i;
+                    tong++; //zhe ge wang le
                 }
-                else
+                else //如guoshi yi ban de sheng xia bu yong?
                 {
                     tmpsum += BB[tree];
                     // cout<<tmpsum<<endl; //mei jing lai
@@ -79,10 +82,12 @@ int main()
             count--;
         }
         // cout<<i<<endl;
-        cout << i << " " << tong << endl;
+
         if (tong >= K / 2)
         {
+
             int thisans = (tong - K / 2) * i + tmpsum;
+            // cout << i << " " << thisans << endl;
             if (thisans > ans)
                 ans = thisans;
         }
@@ -91,3 +96,11 @@ int main()
     cout << ans << endl;
     return 0;
 }
+
+/*wayne@wayne-inspiron3583:~/USACO/2020$ g++ Berry_Picking.cpp;./a.out 
+4 0 0 8
+3 1 0 4
+2 2 1 2
+1 2 2 4
+7
+wayne@wayne-inspiron3583:~/USACO/2020$ */
