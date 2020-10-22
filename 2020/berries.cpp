@@ -31,8 +31,8 @@ int find_max()
 
 int main()
 {
-    freopen("berries2.in", "r", stdin);
-    // freopen("berries.out","w",stdout);
+    freopen("berries.in", "r", stdin);
+    freopen("berries.out","w",stdout);
     cin >> N >> K;
     FOR(0, N)
     cin >> B[i];
@@ -90,7 +90,7 @@ int main()
 
             }
             count--;
-            printf("%d %d %d %d %d\n",i,count,tong,tree,BB[tree]);
+            // printf("%d %d %d %d %d\n",i,count,tong,tree,BB[tree]);
         }
         if(exit_code==1)
         {
@@ -107,7 +107,7 @@ int main()
             int thisans = (tong - K / 2) * i + tmpsum;
             if (thisans > ans)
                 ans = thisans;
-            cout<<ans<<endl;
+            // cout<<ans<<endl;
         }
     }
     cout << ans << endl;
