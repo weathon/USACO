@@ -67,7 +67,7 @@ int main()
             else
             { //yao fem qing chu shi yuan lai jiu xiao hai shi zen me yang, xiang qingchu zai xie
                 tree++;
-                if (i < BB[tree])
+                if (i <= BB[tree])//zhe li ye shi <=?
                 {
                     BB[tree] -= i;
                     tong++; //zhe ge wang le
@@ -90,6 +90,7 @@ int main()
 
             int thisans = (tong - K / 2) * i + tmpsum;
             // cout << i << " " << thisans <<" "<< tmpsum<<endl;//why 6 tmpsum=10
+            printf("Tong: %d\n",tong);
             if (thisans > ans)
                 ans = thisans;
         }
