@@ -75,6 +75,7 @@ int main()
                 else //如guoshi yi ban de sheng xia bu yong?
                 {
                     tmpsum += BB[tree];
+                    cout<<BB[tree]<<endl;
                     // cout<<tmpsum<<endl; //mei jing lai
                 }
             }
