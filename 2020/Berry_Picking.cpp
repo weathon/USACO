@@ -39,7 +39,7 @@ int main()
     // int now = 0;
     int ans = 0;
     // FOR (int i=mymax-1;i>=0;i--)
-    // cout<<mymax<<endl; 8
+    // cout<<mymax<<endl; 8 
     FOR(1, mymax) //zheli gai cheng 1 jiu hao le?
     // 
     // int i=4; 
