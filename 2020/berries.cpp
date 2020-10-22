@@ -113,3 +113,5 @@ int main()
     cout << ans << endl;
     return 0;
 }
+
+//  方法和官方的不一樣 這次好讀很多 kun   cmp %b
