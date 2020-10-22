@@ -28,7 +28,7 @@ int find_max()
 
 int main()
 {
-    freopen("berries2.in", "r", stdin);
+    freopen("berries.in", "r", stdin);
     // freopen("berries.out","w",stdout);
     cin >> N >> K;
     FOR(0, N)
