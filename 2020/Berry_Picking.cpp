@@ -28,7 +28,7 @@ int find_max()
 
 int main()
 {
-    freopen("berries.in", "r", stdin);
+    // freopen("berries2.in", "r", stdin);
     // freopen("berries.out","w",stdout);
     cin >> N >> K;
     FOR(0, N)
@@ -75,12 +75,12 @@ int main()
                 else //如guoshi yi ban de sheng xia bu yong?
                 {
                     tmpsum += BB[tree];
-                    cout<<BB[tree]<<endl;
+                    // --cout<<BB[tree]<<endl;
                     // cout<<tmpsum<<endl; //mei jing lai
                 }
             }
             count--;
-            printf("%d %d %d %d %d\n",i,count,tong,tree,BB[tree]);
+            // --printf("%d %d %d %d %d\n",i,count,tong,tree,BB[tree]);
 
         }
         // cout<<i<<endl;
@@ -90,7 +90,7 @@ int main()
 
             int thisans = (tong - K / 2) * i + tmpsum;
             // cout << i << " " << thisans <<" "<< tmpsum<<endl;//why 6 tmpsum=10
-            printf("Tong: %d\n",tong);
+            // --printf("Tong: %d\n",tong);
             if (thisans > ans)
                 ans = thisans;
         }
@@ -107,3 +107,5 @@ int main()
 1 2 2 4
 7
 wayne@wayne-inspiron3583:~/USACO/2020$ */
+
+// https://www.luogu.com.cn/problem/solution/P6002
