@@ -58,7 +58,6 @@ int main()
         // while (tong>=1)
         while (count >= 1) //bu neng yong K?
         {
-            // printf("%d %d %d %d\n",count,tong,tree,BB[tree]);
             if (i <= BB[tree])//wang le <=
             {
                 BB[tree] -= i; //huan yuan!!!!
@@ -80,6 +79,8 @@ int main()
                 }
             }
             count--;
+            printf("%d %d %d %d %d\n",i,count,tong,tree,BB[tree]);
+
         }
         // cout<<i<<endl;
 
@@ -87,7 +88,7 @@ int main()
         {
 
             int thisans = (tong - K / 2) * i + tmpsum;
-            cout << i << " " << thisans << endl;
+            // cout << i << " " << thisans <<" "<< tmpsum<<endl;//why 6 tmpsum=10
             if (thisans > ans)
                 ans = thisans;
         }
