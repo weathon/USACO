@@ -38,6 +38,7 @@ int main()
     // int now = 0;
     int ans = 0;
     // FOR (int i=mymax-1;i>=0;i--)
+    // cout<<mymax<<endl; 8
     FOR(1, mymax) //zheli gai cheng 1 jiu hao le?
     {
         // cout<<i<<endl;
@@ -50,13 +51,11 @@ int main()
         // while (tong>=1)
         while (count >= 1) //bu neng yong K?
         {
-            //测试
-            // if (i > B[tree])
-            // cout << i << endl;
-            // printf("%d %d\n",i,B[tree]); //0 8 0 8 08
             if (i < B[tree])
             {
-                B[tree] -= i;
+                B[tree] -= i;//huan yuan!!!!
+                tong++; //++ --
+                // yao fang li mian
             }
             else
             { //yao fem qing chu shi yuan lai jiu xiao hai shi zen me yang, xiang qingchu zai xie
@@ -68,16 +67,13 @@ int main()
                 else
                 {
                     tmpsum += B[tree];
-                    // cout<<tmpsum<<endl; mei jing lai
+                    // cout<<tmpsum<<endl; //mei jing lai
                 }
             }
-            tong++; //++ --
-            // cout<<tong<<endl;
-            // tong--;
             count--;
-            // cout<<K<<endl;
         }
         // cout<<i<<endl;
+        cout << i << " " << tong << endl;
         if (tong >= K / 2)
         {
             int thisans = (tong - K / 2) * i + tmpsum;
