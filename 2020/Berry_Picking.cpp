@@ -42,7 +42,7 @@ int main()
     // cout<<mymax<<endl; 8
     FOR(1, mymax) //zheli gai cheng 1 jiu hao le?
     // 
-    // int i=4;
+    // int i=4; 
     {
         // cout<<i<<endl;
         //便利数字
@@ -58,7 +58,7 @@ int main()
         // while (tong>=1)
         while (count >= 1) //bu neng yong K?
         {
-            printf("%d %d %d %d\n",count,tong,tree,BB[tree]);
+            // printf("%d %d %d %d\n",count,tong,tree,BB[tree]);
             if (i <= BB[tree])//wang le <=
             {
                 BB[tree] -= i; //huan yuan!!!!
@@ -87,7 +87,7 @@ int main()
         {
 
             int thisans = (tong - K / 2) * i + tmpsum;
-            // cout << i << " " << thisans << endl;
+            cout << i << " " << thisans << endl;
             if (thisans > ans)
                 ans = thisans;
         }
