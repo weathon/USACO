@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include <stdio.h>
+#include <string.h>
 using namespace std;
 #define rof(a, b) for (int i = b; i > a; i--)
 #define FOR(a, b) for (int i = a; i < b; i++)
@@ -10,6 +12,7 @@ using namespace std;
 int N, K;
 int B[1008];
 int BB[1008];
+int Bimodi[1008];
 
 bool cmp(int a, int b)
 {
@@ -51,6 +54,8 @@ int main()
         int thiiiimax = i;
         int tmpsum = 0;
         int count = K;
+        int exit_code=0;
+        memset(Bimodi,0,1003);
         for (int i = 0; i < N; i++)
         {
             BB[i] = B[i];
@@ -72,47 +77,39 @@ int main()
                     BB[tree] -= i;
                     tong++; //zhe ge wang le
                 }
-                else //如guoshi yi ban de sheng xia bu yong?
+                else
                 {
-                    tmpsum += BB[tree];
-                    // BB[tree]=0;
-                    BB[tree]-=i;
-                    // tree++;
-                    // --cout<<BB[tree]<<endl;
-                    // cout<<tmpsum<<endl; //mei jing lai
+                    // tmpsum += BB[tree];
+                    // BB[tree]-=i;
+                    exit_code=1;
+                    break;
                 }
-                // printf("%d -- %d\n",B[tree+1],BB[tree]);
-                if(BB[tree+1]<=BB[tree])//??
-                    tree--;
+
+                // if(BB[tree+1]<=BB[tree])//??
+                //     tree--;
 
             }
             count--;
             printf("%d %d %d %d %d\n",i,count,tong,tree,BB[tree]);
         }
-        // cout<<i<<endl;
-
+        if(exit_code==1)
+        {
+            sort(BB,BB+N,cmp);
+            for(int ii=0;count>=1;count--)
+            {
+                tmpsum+=BB[ii];
+                ii++;
+            }
+        }
         if (tong >= K / 2)
         {
 
             int thisans = (tong - K / 2) * i + tmpsum;
-            // cout << i << " " << thisans <<" "<< tmpsum<<endl;//why 6 tmpsum=10
-            // --printf("Tong: %d\n",tong);
             if (thisans > ans)
                 ans = thisans;
             cout<<ans<<endl;
         }
-        //From largest to smallest fang bian hen duo
     }
     cout << ans << endl;
     return 0;
 }
-
-/*wayne@wayne-inspiron3583:~/USACO/2020$ g++ Berry_Picking.cpp;./a.out 
-4 0 0 8
-3 1 0 4
-2 2 1 2
-1 2 2 4
-7
-wayne@wayne-inspiron3583:~/USACO/2020$ */
-
-// https://www.luogu.com.cn/problem/solution/P6002
