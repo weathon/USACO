@@ -48,7 +48,7 @@ int main()
         int tmpsum = 0;
         int count = K;
         // while (tong>=1)
-        while (K >= 1) //bu neng yong K?
+        while (count >= 1) //bu neng yong K?
         {
             //测试
             // if (i > B[tree])
@@ -74,7 +74,7 @@ int main()
             tong++; //++ --
             // cout<<tong<<endl;
             // tong--;
-            K--;
+            count--;
             // cout<<K<<endl;
         }
         // cout<<i<<endl;
