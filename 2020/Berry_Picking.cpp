@@ -9,6 +9,8 @@ using namespace std;
 
 int N, K;
 int B[1008];
+int BB[1008];
+
 
 bool cmp(int a, int b)
 {
@@ -48,25 +50,29 @@ int main()
         int thiiiimax = i;
         int tmpsum = 0;
         int count = K;
+        for(int i=0;i<N;i++)
+        {
+            BB[i]=B[i];
+        }
         // while (tong>=1)
         while (count >= 1) //bu neng yong K?
         {
-            if (i < B[tree])
+            if (i < BB[tree])
             {
-                B[tree] -= i;//huan yuan!!!!
+                BB[tree] -= i;//huan yuan!!!!
                 tong++; //++ --
                 // yao fang li mian
             }
             else
             { //yao fem qing chu shi yuan lai jiu xiao hai shi zen me yang, xiang qingchu zai xie
                 tree++;
-                if (i < B[tree])
+                if (i < BB[tree])
                 {
-                    B[tree] -= i;
+                    BB[tree] -= i;
                 }
                 else
                 {
-                    tmpsum += B[tree];
+                    tmpsum += BB[tree];
                     // cout<<tmpsum<<endl; //mei jing lai
                 }
             }
