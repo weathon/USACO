@@ -9,7 +9,7 @@ int went[105][15];
 
 void dfss(int, int, char);
 void dfsd(int, int, char);
-
+bool have_change;
 int mycount;
 
 void clearwent()
@@ -21,7 +21,7 @@ void clearwent()
 
 int main()
 {
-    freopen("mooyomooyo.in", "r", stdin);
+    // freopen("mooyomooyo.in", "r", stdin);
     // freopen("mooyomooyo.out", "w", stdout);
     cin >> N >> K;
     for (int i = 0; i < N; i++)
@@ -46,53 +46,61 @@ int main()
     //     }
     //     cout<<endl;
     // }
-    for (int i = 0; i < N; i++)
+    while (1)
     {
-        for (int j = 0; j <= 11; j++) //yuanlaishifanlea
+        have_change = false;
+        for (int i = 0; i < N; i++)
         {
-            if (space[i][j] != '0' and space[i][j] != '-')
+            for (int j = 0; j <= 11; j++) //yuanlaishifanlea
             {
-                mycount = 0;
-                clearwent();
-                // cout<<space[i][j]<<endl; jingquqianjiuyoubuming targetle
-                dfss(i, j, space[i][j]);
-                cout << mycount << endl;
-                if (mycount > K)
+                if (space[i][j] != '0' and space[i][j] != '-')
                 {
+                    mycount = 0;
                     clearwent();
-                    dfsd(i, j, space[i][j]);
-                }
-            }
-        }
-    }
-    for (int i = N; i >= 0; i--)
-    {
-        for (int j = 0; j <= 11; j++)
-        {
-            if (space[i][j] != '-' and space[i][j] != '0' and space[i+1][j]=='0')
-            {
-                int location=i;
-                while(1)
-                {
-                    if(space[location+1][j]!='0')
+                    // cout<<space[i][j]<<endl; jingquqianjiuyoubuming targetle
+                    dfss(i, j, space[i][j]);
+                    // cout << mycount << endl;
+                    if (mycount >= K)
                     {
-                        space[location][j]=space[i][j];
-                        space[i][j]='0';
-                        break;
+                        have_change=true;
+                        clearwent();
+                        dfsd(i, j, space[i][j]);
                     }
-                    location++;
                 }
             }
         }
-    }
-
-    for (int i = 0; i <= N; i++)
-    {
-        for (int j = 0; j <= 11; j++)
+        for (int i = N; i >= 0; i--)
         {
-            cout << space[i][j];
+            for (int j = 0; j <= 11; j++)
+            {
+                if (space[i][j] != '-' and space[i][j] != '0' and space[i + 1][j] == '0')
+                {
+                    int location = i;
+                    while (1)
+                    {
+                        if (space[location + 1][j] != '0')
+                        {
+                            space[location][j] = space[i][j];
+                            space[i][j] = '0';
+                            break;
+                        }
+                        location++;
+                    }
+                }
+            }
         }
-        cout << endl;
+        if (!have_change)
+        {
+            for (int i = 0; i <= N; i++)
+            {
+                for (int j = 0; j <= 11; j++)
+                {
+                    if(space[i][j]!='-')cout << space[i][j];
+                }
+                cout << endl;
+            }
+            return 0;
+        }
     }
 }
 
