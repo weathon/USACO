@@ -48,7 +48,7 @@ int main()
     // }
     for (int i = 0; i < N; i++)
     {
-        for (int j = 0; j <= 11; j++) //yuanlaishifanlea 
+        for (int j = 0; j <= 11; j++) //yuanlaishifanlea
         {
             if (space[i][j] != '0' and space[i][j] != '-')
             {
@@ -56,7 +56,7 @@ int main()
                 clearwent();
                 // cout<<space[i][j]<<endl; jingquqianjiuyoubuming targetle
                 dfss(i, j, space[i][j]);
-                cout<<mycount<<endl;
+                cout << mycount << endl;
                 if (mycount > K)
                 {
                     clearwent();
@@ -65,20 +65,40 @@ int main()
             }
         }
     }
-    
-        for (int i = 0; i <= N; i++)
+    for (int i = N; i >= 0; i--)
+    {
+        for (int j = 0; j <= 11; j++)
         {
-            for (int j = 0; j <= 11; j++)
+            if (space[i][j] != '-' and space[i][j] != '0' and space[i+1][j]=='0')
             {
-                cout << space[i][j];
+                int location=i;
+                while(1)
+                {
+                    if(space[location+1][j]!='0')
+                    {
+                        space[location][j]=space[i][j];
+                        space[i][j]='0';
+                        break;
+                    }
+                    location++;
+                }
             }
-            cout << endl;
         }
+    }
+
+    for (int i = 0; i <= N; i++)
+    {
+        for (int j = 0; j <= 11; j++)
+        {
+            cout << space[i][j];
+        }
+        cout << endl;
+    }
 }
 
 void dfss(int x, int y, char target)
 {
-                // cou<<target<<endl;
+    // cou<<target<<endl;
 
     // cout<<x<<endl;
     // cout<<target<<endl;
@@ -89,7 +109,6 @@ void dfss(int x, int y, char target)
     {
         mycount++;
         went[x][y] = 1;
-
 
         // for (int i = 0; i <= N; i++)
         // {
