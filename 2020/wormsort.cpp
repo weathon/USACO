@@ -49,7 +49,7 @@ void colorize(int i, int w)
 int main()
 {
     freopen("wormsort.in", "r", stdin);
-    // freopen("wormsort.out", "w", stdout);
+    freopen("wormsort.out", "w", stdout);
     cin >> N >> M;
     for (int i = 0; i < N; i++)
     {
@@ -98,24 +98,27 @@ int main()
     int lastmid = -1;
     while (1)
     {
-        int mid = (0 + maxw) / 2.0 + 0.5;
-        // if (mid == lastmid)
-
-        printf("%d %d %d",);
+        int mid = (bl + br) / 2.0 + 0.5;
+        if (mid == lastmid)
+        {
+            cout << mid-1 << endl;
+            return 0;
+        }
+        // printf("%d %d %d",bl,br,mid);
         if (check(mid) == false)
         {
-            if(check(mid-1))
-            {
-                cout<<mid<<endl;
-                return 0;
-            }
-            r=mid;  //bu shi r er shi br
+            // if(check(mid-1))
+            // {
+            //     cout<<mid<<endl;
+            //     return 0;
+            // }
+            br = mid; //bu shi r er shi br
         }
         else
         {
-            l=mid;
+            bl = mid;
         }
-        
+
         clean_color();
 
         lastmid = mid;
