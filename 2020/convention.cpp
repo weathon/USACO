@@ -6,7 +6,7 @@ using namespace std;
 
 int N, M, C;
 int cows[100005];
-
+int goal;
 int check(int n)
 {
     // if (n <= 10)
@@ -14,31 +14,45 @@ int check(int n)
     // else
     //     return 1;
 
-    int bus=0;
-    int cow=1;
-    for(int i=1;i<N;i++)
+    int bus = 1; // zuikaishiyaoyige bus
+    int cow = 1;
+    int start = cows[0];
+    for (int i = 1; i < N; i++)
     {
-        if(cows[i]-cows[i-1]<=n)
+        if (cows[i] - start <= n) //=tongyitangcaiyoubiyao ran  deng deng n shi sm? shijianjiange
+        // yan pi yang  tu ran xiang dao bu shi he shang yige er shi di yi ge ying wei shi qian mian de yaodenghou mian de
         {
-            if(cow<=C)
+            if (cow < C)
             {
                 cow++;
             }
-            else{
-                cow=0;
+            else
+            {
+                cow = 1;
                 bus++;
+                start=cows[i];
             }
         }
-        else{
-            cow=0;
+        else
+        {
+            cow = 1;
             bus++;
+            start=cows[i];
         }
+        // printf("bus: %d cow: %d start: %d\n",bus,cow,start);
+
     }
-    if(bus>M)//车不够 bunengdengyu
+    // if (cow == C)  //zhe li youpanduan bingqie shang mian <= huishi1
+    // {
+        // bus++;
+    // }
+    // cout <<"bus: " << bus << endl;
+    // cout<<goal<<endl;  yuan lai shi goal you wen ti
+    if (bus <= M) //太大了
     {
-        return -1;
+        return 1;
     }
-    return 1;
+    return -1;
 }
 
 int main(void)
@@ -56,12 +70,31 @@ int main(void)
     int l = 0;
     int r = cows[N - 1];
     int mid;
-    int lasttime=-1;
+    int lasttime = -1;
+
+    int bus = 1;
+    int cow = 1;
+    for (int i = 1; i < N; i++) //< not <=
+    {
+        // cout << cow << " " << bus << endl;
+        if (cow < C) //xiao yu cai ke yi jia
+        {
+            cow++;
+        }
+        else
+        {
+            cow = 1; //not 0
+            bus++;
+        }
+    }
+
+    goal = bus;
+    // cout << bus << endl; //1?
     while (1)
     {
-        cout << r << " " << l << " " << mid << " " << endl;
         mid = (l + r) / 2.0 + 0.5;
-        if(mid==lasttime)
+        // cout << l << " " << mid << " " << r << " " << endl;
+        if (mid == lasttime)
         {
             break;
         }
@@ -73,7 +106,7 @@ int main(void)
         {
             r = mid;
         }
-        lasttime=mid;
+        lasttime = mid;
     }
     cout << mid << endl;
     return 0;
