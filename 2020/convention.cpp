@@ -57,8 +57,15 @@ int check(int n)
 
 int main(void)
 {
+    // bei wu jie le, yi kai shi yi wei cong you wang zuo zhao bian hua de dian shi ji shang bu shi?
+    // you bian hua le bu yi ding shi zui hao de?:wq
+    // zhe ge da zi hen shuang ixng dian nao de huang geng hsuang:wq
+    // mei xing si kan shi ping?
+    // wang le shua ya!!!
+    // shi ji shang zhuan zhu xie de ye zhi you yi xiao shi?
+    // wei sm bian ji zhaung tai shijian fan er shao? bu shi quan bu zai da zi
     freopen("convention.in", "r", stdin);
-    // freopen("convention.out", "w", stdout);
+    freopen("convention.out", "w", stdout);
     cin >> N >> M >> C;
     for (int i = 0; i < N; i++)
     {
