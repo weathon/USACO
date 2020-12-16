@@ -156,3 +156,6 @@ int check(int w)
 
     return true;
 }
+
+// xian wan cheng qiong ju ran hou er fen tiao zheng cuo wu bian liang he bian jie  hysm
+// xiao ping mu shang xie dai ma ye cha bu duo a ?  daimazhiliangcha
